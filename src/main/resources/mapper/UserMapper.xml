@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.surveytogether.mapper.UserMapper">
+
+	<sql id="UserCol">
+		id as username,
+		password,
+		name,
+		register_date,
+		isAccountNonExpired,
+		isAccountNonLocked,
+		isCredentialsNonExpired,
+		isEnabled
+	</sql>
+	
+	<insert id="insertUser" parameterType="UserDTO">
+		INSERT INTO 	tb_user(
+						<include refid="UserCol" />
+						)VALUES(
+						#{username},
+						#{password},
+						#{name},
+						#{registerName},
+						#{isAccountNonExpired},
+						#{isAccountNonLocked},
+						#{isCredentialsNonExpired},
+						#{isEnabled}
+						)
+	</insert>
+	
+	<select id="selectUser" parameterType="String" resultType="UserDTO">
+		SELECT 	<include refid="UserCol" />
+		FROM 	tb_user
+		WHERE 	id = #{username}
+	</select>
+	
+	<select id="selectAuthorities"  parameterType="String" resultType="org.springframework.security.core.authority.SimpleGrantedAuthority">
+		SELECT 	auth
+		FROM 	tb_auth
+		WHERE 	id = #{username}
+	</select>
+	
+	<insert id="createAuthority" parameterType="org.springframework.security.core.authority.SimpleGrantedAuthority">
+		INSERT INTO 	tb_auth(
+						id,auth
+						)VALUES
+						<foreach item="authority" index="index" collection="authorities" separator=",">
+							(#{username},#{authority.role})
+						</foreach>
+						ON DUPLICATE KEY
+						UPDATE
+						id = #{username}
+	</insert>
+	
+</mapper>

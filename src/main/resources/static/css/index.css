@@ -1,0 +1,68 @@
+@charset "UTF-8";
+
+* {
+	margin:0;
+	padding:0;
+	box-sizing: border-box;
+}
+
+.header-bar{
+	width:100%;
+	height:60px;
+	background-color: #1e7ba4;
+	text-align: center;
+}
+.header-title{
+	color:#ffffff;
+	font-weight:bold;
+	font-size: 2rem;
+	line-height: 60px;
+}
+
+.wrapper{
+	width:100%;
+	height:100%;
+	margin:0 auto;
+	text-align: center;
+}
+
+.header-icon{
+	margin:50px 0 30px 0;
+	color:#1e7ba4;
+	font-size: 150px;
+}
+.login-box { 
+	margin-top:30px;
+	
+}
+.input-bar{
+	width:200px;
+	padding:5px;
+	margin-bottom:10px;
+}
+.remember-label{
+	color: #c0c0c0;
+}
+#remember-me{
+	margin-bottom:20px;
+}
+.btn{
+	border:none;
+	border-radius:9px;
+	background-color: #c0c0c0;
+	color: #ffffff;
+	padding: 5px 10px;
+	transition:background-color 0.2s;
+}
+.btn:hover{
+	background-color:#1e7ba4;
+	cursor: pointer;
+}
+.register-btn{
+	margin-top:10px;
+}
+@media only screen and (min-width:1200px) {
+	.wrapper{
+		max-width: 1200px;
+	}
+}

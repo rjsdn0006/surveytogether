@@ -1,0 +1,39 @@
+spring:
+  profiles:
+    active:
+    - local
+  mvc:
+    view:
+      prefix: "/WEB-INF/views"
+      suffix: ".jsp"
+  datasource:
+    url: jdbc:mysql://localhost:3306/surveytogether?characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  session:
+    jdbc:
+      initialize-schema: always
+  devtools: 
+    livereload:
+      enabled: true
+server:
+  port: 8080
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+    jsp:
+      init-parameters:
+        development: true
+    session:
+      timeout: 7200
+  error:
+    whitelabel:
+      enabled: false
+mybatis:
+  type-aliases-package: com.surveytogether.domain
+  mapper-locations: mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
