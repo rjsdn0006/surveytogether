@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="30 seconds">
+   
+   <!-- console 로그 설정 -->
+   <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+      <encoder>
+         <pattern>%d{HH:mm:ss.SSS} %highlight([%-5level]) --- [%thread] %logger{35} : %msg %n</pattern>
+      </encoder>
+   </appender>
+   
+   <!-- 로그 파일로 남기는 설정 -->
+   <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+      <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+         <fileNamePattern>C:\sts-logs\logback-%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+         <maxHistory>7</maxHistory>
+      </rollingPolicy>
+      <encoder>
+         <pattern>%d{HH:mm:ss.SSS} %-5level --- [%thread] %logger{35} : %msg %n</pattern>
+      </encoder>
+   </appender>
+<!-- 설정한 로그 등록  -->
+   
+   <!-- mapper 패키지  -->   
+   <logger name="com.surveytogether.mapper" level="TRACE" additivity="false">
+      <appender-ref ref="FILE" />
+      <appender-ref ref="STDOUT" />
+   </logger>
+   <!-- // mapper 패키지  -->
+   
+   
+   <logger name="com.surveytogether" level="DEBUG" additivity="false">
+      <appender-ref ref="FILE" />
+      <appender-ref ref="STDOUT" />
+   </logger>
+   
+    <logger name="org.springframework.web" level="WARN" additivity="false">
+      <appender-ref ref="FILE" />
+      <appender-ref ref="STDOUT" />
+   </logger>
+   
+   <root level="WARN">
+      <appender-ref ref="FILE" />
+      <appender-ref ref="STDOUT" />
+   </root>
+<!-- //설정한 로그 등록  -->
+</configuration>

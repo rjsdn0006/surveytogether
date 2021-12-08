@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,9 +19,15 @@ public class UserServiceImpl implements UserService{
 
 	@Autowired
 	UserMapper userMapper;
+	
 	@Autowired
 	@Lazy
 	PasswordEncoder passwordEncoder;
+	/*private PasswordEncoder passwordEncoder;
+	Autowired
+	public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
+		this.passwordEncoder = passwordEncoder;
+	}*/
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -41,7 +48,10 @@ public class UserServiceImpl implements UserService{
 		user.setEnabled(true);
 		
 		queryResult = userMapper.insertUser(user);
+		
+		user.setAuthorities(AuthorityUtils.createAuthorityList("ROLE_USER"));
 		createAuthority(user);
+		
 		return (queryResult==1)?true:false;
 	}
 

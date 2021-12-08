@@ -50,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	      .formLogin()
 	            .loginPage("/index") // login.jsp 에서의 정보를 가져옴 
 	            .loginProcessingUrl("/loginProcess") // 로그인처리 로직을 수행하는 곳
-	            .defaultSuccessUrl("/", true) // 성공시 이동페이지 
+	            .defaultSuccessUrl("/home", true) // 성공시 이동페이지 
 	            .permitAll()
 	            .and()
 	      .logout()
@@ -71,7 +71,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	         .sessionCreationPolicy(SessionCreationPolicy.NEVER) // 세션사용정책   
 	         .invalidSessionUrl("/index")
 	         .and()
-	      .csrf(); // 개발시에는 .csrf().disable()로 멈춰주는것이 편하다.       
+	      .csrf().disable(); // 개발시에는 .csrf().disable()로 멈춰주는것이 편하다.       
 	   }
 	   
 	@Bean

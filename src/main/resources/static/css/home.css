@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+.menu-box{
+	margin-top: 15rem;
+	display: flex;
+	justify-content: space-around;
+}
+
+.home-menu{
+	color: #c0c0c0;
+	cursor: pointer;
+	transition: color 0.3s;
+}
+
+.home-menu:hover{
+	color: #1e7ba4;
+	font-weight: bold;
+}
+
+i{
+	font-size: 11rem;
+}
+
+.menu-desc{
+	margin-top: 1rem;
+	font-size: 2rem;
+}
+

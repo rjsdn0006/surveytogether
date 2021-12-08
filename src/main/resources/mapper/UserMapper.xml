@@ -15,18 +15,26 @@
 	
 	<insert id="insertUser" parameterType="UserDTO">
 		INSERT INTO 	tb_user(
-						<include refid="UserCol" />
+						id,
+						password,
+						name,
+						register_date,
+						isAccountNonExpired,
+						isAccountNonLocked,
+						isCredentialsNonExpired,
+						isEnabled
 						)VALUES(
 						#{username},
 						#{password},
 						#{name},
-						#{registerName},
+						NOW(),
 						#{isAccountNonExpired},
 						#{isAccountNonLocked},
 						#{isCredentialsNonExpired},
 						#{isEnabled}
 						)
 	</insert>
+	
 	
 	<select id="selectUser" parameterType="String" resultType="UserDTO">
 		SELECT 	<include refid="UserCol" />

@@ -37,3 +37,4 @@ mybatis:
   mapper-locations: mapper/**/*.xml
   configuration:
     map-underscore-to-camel-case: true
+logging:  config: classpath:logback-spring.xml  
