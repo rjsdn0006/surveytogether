@@ -92,13 +92,18 @@ textarea{
 }
 .survey-title{
 	font-size: 2rem;
+	font-weight: bold;
 	border-bottom: 1px solid  #c0c0c0;
 }
 .add-question{
 	margin-top: 1rem;
 	margin-bottom: 0.5rem;
+	padding-top: 1rem;
 	border-top: 1px dashed #dfdfdf;
+	font-size: 1.1rem;
+	font-weight: bold;
 }
+
 .add-question-btn-box{
 	width: 50%;
 	margin: 0 auto;
