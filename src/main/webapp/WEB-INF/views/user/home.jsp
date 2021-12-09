@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Home</title>
 <link rel="stylesheet" href="/css/home.css" />
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 </head>
 <body>
 
@@ -23,16 +24,21 @@
 			<i class="far fa-clipboard survey-board-icon"></i>
 			<p class="menu-desc">설문조사참여</p>
 		</div>
-		<div class="home-menu">
+		<div class="home-menu" onclick="movePage('/user/mysurvey')">
 			<i class="fas fa-user-edit mysurvey-icon"></i>
 			<p class="menu-desc">나의설문조사</p>
 		</div>
 	</div>
 
 
-	<sec:authentication property="principal" var="user" />
+	<!-- <sec:authentication property="principal" var="user" /> -->
 </div>
 
+<script>
+	function movePage(url){
+		location.href = url;
+	}
+</script>
 
 </body>
 </html>

@@ -23,11 +23,6 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	@Lazy
 	PasswordEncoder passwordEncoder;
-	/*private PasswordEncoder passwordEncoder;
-	Autowired
-	public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
-		this.passwordEncoder = passwordEncoder;
-	}*/
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
