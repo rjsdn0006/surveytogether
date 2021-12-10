@@ -157,8 +157,11 @@ textarea{
 	border: none;
 	padding: 0.5rem;
 	outline: none;
+	width: 80%;
 }
-
+.firstOptionSpace{
+	cursor: default;
+}
 /* --------------------- sideBtn영역 디자인 --------------------- */ 
 
 .side-box{

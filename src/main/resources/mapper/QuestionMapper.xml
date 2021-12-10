@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.surveytogether.mapper.QuestionMapper">
+
+	<sql id="QuestionCol">
+		idx,
+		survey_idx,
+		title,
+		format
+	</sql>
+
+	<insert id="insertQuestion" parameterType="QuestionDTO">
+		INSERT INTO 	tb_question(
+						<include refid="QuestionCol" />
+						)VALUES(
+						#{idx},
+						#{surveyIdx},
+						#{title},
+						#{format}
+						)
+	</insert>
+	
+	<update id="updateQuestion" parameterType="QuestionDTO">
+		UPDATE 	tb_question
+		SET 	title = #{title}
+		WHERE 	idx = #{idx}
+	</update>
+	
+	<delete id="deleteQuestion" parameterType="long">
+		DELETE FROM 	tb_question 
+		WHERE 			idx = #{idx}
+	</delete>
+	
+	<select id="selectQuestionDetail" parameterType="long" resultType="QuestionDTO">
+		SELECT 	<include refid="QuestionCol" />
+		FROM 	tb_question
+		WHERE 	idx = #{idx}
+	</select>
+	
+	<select id="selectQuestionList" parameterType="long" resultType="QuestionDTO">
+		SELECT 	<include refid="QuestionCol" />
+		FROM 	tb_question
+		WHERE 	survey_idx = #{surveyIdx}
+	</select>
+</mapper>

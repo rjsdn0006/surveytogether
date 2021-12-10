@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.surveytogether.mapper.SurveyMapper">
+
+	<sql id="surveyCol">
+		idx,
+		writer,
+		title,
+		desc,
+		create_time,
+		update_time
+	</sql>
+	
+	<insert id="insertSurvey" parameterType="SurveyDTO">
+		INSERT INTO 	tb_survey(
+						<include refid="surveyCol"/>
+						)VALUES(
+						#{idx},
+						#{writer},
+						#{title},
+						#{desc},
+						#{createTime},
+						#{updateTime}
+						)
+	</insert>
+	
+	<update id="updateSurvey" parameterType="SurveyDTO">
+		UPDATE 	tb_survey
+		SET 	title = #{title},
+				desc = #{desc},
+				update_time = NOW()
+		WHERE 	idx = #{idx}
+	</update>
+	
+	<delete id="deleteSurvey" parameterType="long">
+		DELETE FROM 	tb_survey
+		WHERE 			idx = #{idx}
+	</delete>
+	
+	<select id="selectSurveyDetail" parameterType="long" resultType="SurveyDTO">
+		SELECT 	<include refid="surveyCol" />
+		FROM 	tb_survey
+		WHERE 	idx = #{idx}
+	</select>
+	
+	<select id="selectSurveyList" parameterType="SurveyDTO" resultType="SurveyDTO">
+		SELECT 	<include refid="surveyCol" />
+		FROM 	tb_survey
+		<!-- 리스트이므로 페이징과 검색정보가 들어가야한다. -->
+	</select>
+	
+	<select id="selectSurveyTotalCount" parameterType="SurveyDTO" resultType="int">
+		SELECT COUNT(*)
+		FROM tb_survey
+		<!-- 검색정보가 들어가야한다.  -->
+	</select>
+</mapper>

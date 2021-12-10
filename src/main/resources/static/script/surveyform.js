@@ -53,7 +53,7 @@ $(document).on("click",".select-success-btn",function(){
 			<p><input type="text" name="" placeholder="객관식 질문" class="input-bar add-question" required/></p>
 			<div class="choose-question-container">
 				<p class="choose-question-box">
-					<button type="button" class="choose-question-delete-btn" onclick="removeOption(this)">X</button>
+					<span class="firstOptionSpace">&nbsp;&nbsp;&nbsp;&nbsp;</span>
 					<input type="radio" name="option" disabled/>
 					<input type="text" placeholder="추가된 옵션" class="choose-question-option-desc" required/>
 				</p>
@@ -71,7 +71,7 @@ $(document).on("click",".select-success-btn",function(){
 			<p><input type="text" name="" placeholder="체크박스 질문" class="input-bar add-question" required/></p>
 			<div class="choose-question-container">
 				<p class="choose-question-box">
-					<button type="button" class="choose-question-delete-btn" onclick="removeOption(this)">X</button>
+					<span class="firstOptionSpace">&nbsp;&nbsp;&nbsp;&nbsp;</span>
 					<input type="checkbox" name="option" disabled/>
 					<input type="text" placeholder="추가된 옵션" class="choose-question-option-desc" required/>
 				</p>
@@ -89,7 +89,7 @@ $(document).on("click",".select-success-btn",function(){
 			<p><input type="text" name="" placeholder="드롭다운 질문" class="input-bar add-question" required/></p>
 			<div class="choose-question-container">
 				<p class="choose-question-box">
-					<button type="button" class="choose-question-delete-btn" onclick="removeOption(this)">X</button>
+					<span class="firstOptionSpace">&nbsp;&nbsp;&nbsp;&nbsp;</span>
 					<input type="text" placeholder="추가된 옵션" class="choose-question-option-desc" required/>
 				</p>
 			</div>

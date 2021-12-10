@@ -1,0 +1,55 @@
+현재
+- Survey Mapper,Service를 구현하자  
+ (survey는 페이징이 필요하므로 전달시 객체를 전달한다) 
+- QuestionService에 QuestionOption도 함께 등록하는 동작을 수행하자 
+---
+
+어떻게 설문지 내용들을 저장할까 
+
+1. 데이터베이스 테이블생성 
+tb_survey: idx(pk), writer(fk), title, desc, question_idx(fk), create_time, update_time
+tb_question: idx(pk), title, format
+tb_question_option: idx(pk), question_idx(fk), name
+
+참고) 제약조건의 추가 
+ALTER TABLE 테이블명 
+ADD CONSTRAINT 제약조건명 
+FOREIGN KEY(question_idx) REFERENCES survey(idx) // tb_question은 외래키가 없음에 주의
+ON DELETE CASCADE
+---
+ALTER TABLE 테이블명 
+ADD CONSTRAINT 제약조건명 
+FOREIGN KEY(question_idx) REFERENCES question(question_idx)
+ON DELETE CASCADE
+
+2. mapper와 service를 구현
+생성 C) 
+- 질문들의 title,format을 전달받아 tb_question을 만든다. 
+- 질문옵션들의 name을 전달받아 위에서 만든 tb_question의 idx와 함께 등록한다.
+- 설문조사의 title,desc,writer 등을 전달받아 tb_survey를 만들고 tb_question의 idx와 함께 등록한다.
+읽기 R)
+- 목록클릭시 idx를 전달하여 tb_survey의 정보를 불러온다. 
+- tb_survey의 question_idx를 전달하여 tb_question의 정보를 불러온다. 
+- tb_survey의 question_idx를 전달하여 tb_question_option의 정보를 불러온다. 
+- 각요소를 model에 넣어주고 jsp화면에서 이를 뿌려서 양식을 만든다. (이부분이 길것으로 예상)
+- 나중구현 : 현재 로그인한 user와 survey의 writer가 일치하다면 설문조사 참여불가능 
+수정 U)
+- 목록클릭시 idx를 전달하여 tb_survey의 정보를 불러온다. 
+- tb_survey의 question_idx를 전달하여 tb_question의 정보를 불러온다. 
+- tb_survey의 question_idx를 전달하여 tb_question_option의 정보를 불러온다. 
+- 각요소를 model에 넣어주고 jsp화면에서 이를 뿌려서 양식을 만든다. (읽기와 양식이 다른것에주의)
+- 수정을 하게되면 변하게되는것 : 질문자체가 추가/삭제되는경우, 질문의옵션이 추가/삭제되는경우, 설문조사의 title이나 desc가 변하는경우
+  설문조사의 title, desc 는 그냥 대입하듯 불러오면됨 
+  (질문이나 옵션이 추가/삭제되는지의 여부를 확인하고, 삭제할때 해당 idx를 전달해준다)
+  질문자체가 추가되면 tb_question을 새로만들면된다. 
+  질문자체가 삭제되면 해당 idx의 tb_question을 테이블에서 삭제하면된다. 
+  옵션이 추가되면 tb_question_option을 새로만들면된다. 
+  옵션이 삭제되면 해당 idx의 tb_question_option을 테이블에서 삭제하면된다.  
+삭제 D)
+- 삭제의경우: mysurvey 목록에서 내가 삭제버튼을 누르는경우
+            surveyboard 목록에서 관리자가 삭제버튼을 누르는경우
+            이때, writer와 로그인username이 일치하거나 role이 'ROLE_ADMIN' 이어야 한다.
+- 삭제클릭시 idx를 전달하여 tb_survey의 정보를 불러온다.
+- tb_survey의 idx를 전달하여 tb_question을 삭제한다.
+- tb_question의 idx를 전달하여 tb_question_option을 삭제한다. 
+- tb_survey를 삭제한다. 
