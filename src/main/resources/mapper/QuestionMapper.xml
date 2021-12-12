@@ -3,43 +3,43 @@
 <mapper namespace="com.surveytogether.mapper.QuestionMapper">
 
 	<sql id="QuestionCol">
-		idx,
-		survey_idx,
-		title,
-		format
+		qu_idx,
+		qu_survey_idx,
+		qu_title,
+		qu_format
 	</sql>
 
-	<insert id="insertQuestion" parameterType="QuestionDTO">
+	<insert id="insertQuestion" parameterType="QuestionDTO" useGeneratedKeys="true" keyProperty="idx">
 		INSERT INTO 	tb_question(
 						<include refid="QuestionCol" />
 						)VALUES(
-						#{idx},
-						#{surveyIdx},
-						#{title},
-						#{format}
+						#{quIdx},
+						#{quSurveyIdx},
+						#{quTitle},
+						#{quFormat}
 						)
 	</insert>
 	
 	<update id="updateQuestion" parameterType="QuestionDTO">
 		UPDATE 	tb_question
-		SET 	title = #{title}
-		WHERE 	idx = #{idx}
+		SET 	qu_title = #{quTitle}
+		WHERE 	qu_idx = #{quIdx}
 	</update>
 	
 	<delete id="deleteQuestion" parameterType="long">
 		DELETE FROM 	tb_question 
-		WHERE 			idx = #{idx}
+		WHERE 			qu_idx = #{quIdx}
 	</delete>
 	
 	<select id="selectQuestionDetail" parameterType="long" resultType="QuestionDTO">
 		SELECT 	<include refid="QuestionCol" />
 		FROM 	tb_question
-		WHERE 	idx = #{idx}
+		WHERE 	qu_idx = #{quIdx}
 	</select>
 	
 	<select id="selectQuestionList" parameterType="long" resultType="QuestionDTO">
 		SELECT 	<include refid="QuestionCol" />
 		FROM 	tb_question
-		WHERE 	survey_idx = #{surveyIdx}
+		WHERE 	qu_survey_idx = #{quSurveyIdx}
 	</select>
 </mapper>

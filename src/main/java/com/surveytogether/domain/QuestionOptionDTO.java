@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class QuestionOptionDTO {
-	private Long idx;
-	private Long questionIdx;
-	private String name;
+	private Long opIdx;
+	private Long opQuestionIdx;
+	private String opName;
 }

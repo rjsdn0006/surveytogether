@@ -3,44 +3,44 @@
 <mapper namespace="com.surveytogether.mapper.SurveyMapper">
 
 	<sql id="surveyCol">
-		idx,
-		writer,
-		title,
-		desc,
-		create_time,
-		update_time
+		su_idx,
+		su_writer,
+		su_title,
+		su_desc,
+		su_create_time,
+		su_update_time
 	</sql>
 	
 	<insert id="insertSurvey" parameterType="SurveyDTO">
 		INSERT INTO 	tb_survey(
 						<include refid="surveyCol"/>
 						)VALUES(
-						#{idx},
-						#{writer},
-						#{title},
-						#{desc},
-						#{createTime},
-						#{updateTime}
+						#{suIdx},
+						#{suWriter},
+						#{suTitle},
+						#{suDesc},
+						#{suCreateTime},
+						#{suUpdateTime}
 						)
 	</insert>
 	
 	<update id="updateSurvey" parameterType="SurveyDTO">
 		UPDATE 	tb_survey
-		SET 	title = #{title},
-				desc = #{desc},
-				update_time = NOW()
-		WHERE 	idx = #{idx}
+		SET 	su_title = #{suTitle},
+				su_desc = #{suDesc},
+				su_update_time = NOW()
+		WHERE 	su_idx = #{suIdx}
 	</update>
 	
 	<delete id="deleteSurvey" parameterType="long">
 		DELETE FROM 	tb_survey
-		WHERE 			idx = #{idx}
+		WHERE 			su_idx = #{suIdx}
 	</delete>
 	
 	<select id="selectSurveyDetail" parameterType="long" resultType="SurveyDTO">
 		SELECT 	<include refid="surveyCol" />
 		FROM 	tb_survey
-		WHERE 	idx = #{idx}
+		WHERE 	su_idx = #{suIdx}
 	</select>
 	
 	<select id="selectSurveyList" parameterType="SurveyDTO" resultType="SurveyDTO">

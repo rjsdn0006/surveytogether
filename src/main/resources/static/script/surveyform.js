@@ -146,3 +146,29 @@ function removeOption(param){
 	let deleteBtn = $(param);
 	deleteBtn.parent().remove();
 }
+
+ /* ------------------------ 저장영역 ------------------------ */
+function saveSurvey(){
+	let survey = {
+        suTitle : $('.survey-title').val(),
+        suDesc : $('.survey-desc').val()
+    };
+    let question = {
+	 	//가져왔다고 가정 
+	};
+	let questionOption = {
+		// 가져왔다고 가정
+	};
+    
+    let allData = {"survey":survey,"question":question,"questionOption":questionOption};
+    
+	
+	$.ajax({
+		url:"/user/savesurvey",
+		method:"post",
+		data:JSON.stringify(allData),
+		contentType: "application/json"
+	}).done(function(){
+		alert("완료");	
+	});
+}

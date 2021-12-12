@@ -6,10 +6,10 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SurveyDTO {
-	private Long idx;
-	private String writer;
-	private String title;
-	private String desc;
-	private String createTime;
-	private String updateTime;
+	private Long suIdx;
+	private String suWriter;
+	private String suTitle;
+	private String suDesc;
+	private String suCreateTime;
+	private String suUpdateTime;
 }

@@ -3,41 +3,41 @@
 <mapper namespace="com.surveytogether.mapper.QuestionOptionMapper">
 
 	<sql id="QuestionOptionCol">
-		idx,
-		question_idx,
-		name
+		op_idx,
+		op_question_idx,
+		op_name
 	</sql>
 
 	<insert id="insertQuestionOption" parameterType="QuestionOptionDTO">
 		INSERT INTO 	tb_question_option(
 						<include refid="QuestionOptionCol" />
 						)VALUES(
-						#{idx},
-						#{questionIdx},
-						#{name}
+						#{opIdx},
+						#{opQuestionIdx},
+						#{opName}
 						)
 	</insert>
 	
 	<update id="updateQuestionOption" parameterType="QuestionOptionDTO">
 		UPDATE 	tb_question_option
-		SET 	name = #{name}
-		WHERE 	idx = #{idx}
+		SET 	op_name = #{opName}
+		WHERE 	op_idx = #{opIdx}
 	</update>
 	
 	<delete id="deleteQuestionOption" parameterType="long">
 		DELETE FROM 	tb_question_option 
-		WHERE 			idx = #{idx}
+		WHERE 			op_idx = #{opIdx}
 	</delete>
 	
 	<select id="selectQuestionOptionDetail" parameterType="long" resultType="QuestionOptionDTO">
 		SELECT 	<include refid="QuestionOptionCol" />
 		FROM 	tb_question_option
-		WHERE 	idx = #{idx}
+		WHERE 	op_idx = #{opIdx}
 	</select>
 	
 	<select id="selectQuestionOptionList" parameterType="long" resultType="QuestionOptionDTO">
 		SELECT 	<include refid="QuestionOptionCol" />
 		FROM 	tb_question_option
-		WHERE 	question_idx = #{questionIdx}
+		WHERE 	op_question_idx = #{opQuestionIdx}
 	</select>
 </mapper>

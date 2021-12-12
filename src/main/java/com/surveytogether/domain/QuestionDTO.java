@@ -6,8 +6,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class QuestionDTO {
-	private Long idx;
-	private Long surveyIdx;
-	private String title;
-	private String format;
+	private Long quIdx;
+	private Long quSurveyIdx;
+	private String quTitle;
+	private String quFormat;
 }

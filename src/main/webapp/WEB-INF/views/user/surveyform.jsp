@@ -21,7 +21,7 @@
 		<div class="right-box">
 			<a href="/user/mysurvey"><span class="menu1">뒤로가기</span></a>
 			<a href="#"><span class="menu2">응답사항</span></a>
-			<a href="#"><span class="menu3">저장하기</span></a>
+			<a href="#" onclick="saveSurvey();"><span class="menu3">저장하기</span></a>
 		</div>
 	</div>
 </div>
@@ -32,8 +32,8 @@
 	<form class="surveyForm" action="#" method="POST">
 		<fieldset>
 			<legend>글제목</legend>
-			<p><input type="text" name="surveyTitle" placeholder="설문지 제목" class="input-bar survey-title" required/></p>
-			<p><textarea name="surveyDesc" placeholder="설문지 설명" class="input-bar"></textarea></p>
+			<p><input type="text" name="suTitle" placeholder="설문지 제목" class="input-bar survey-title" required/></p>
+			<p><textarea name="suDesc" placeholder="설문지 설명" class="input-bar survey-desc"></textarea></p>
 		</fieldset>
 		<!-- 추가질문목록이 추가되는 영역 -->
 		<div class="add-survey-box">
