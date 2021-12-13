@@ -22,7 +22,7 @@ public class QuestionServiceImpl implements QuestionService {
 		
 		int queryResult = 0;
 		
-		if(question.getIdx() == null) {
+		if(question.getQuIdx() == null) {
 			// 새로운 질문등록일경우
 			queryResult = questionMapper.insertQuestion(question); 	
 		}else {

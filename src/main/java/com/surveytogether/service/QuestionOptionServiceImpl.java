@@ -18,7 +18,7 @@ public class QuestionOptionServiceImpl implements QuestionOptionService {
 		
 		int queryResult = 0;
 		
-		if(option.getIdx() == null) {
+		if(option.getOpIdx() == null) {
 			// 새로운 옵션등록일경우
 			queryResult = questionOptionMapper.insertQuestionOption(option); 	
 		}else {

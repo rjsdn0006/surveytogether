@@ -53,3 +53,7 @@ ON DELETE CASCADE
 - tb_survey의 idx를 전달하여 tb_question을 삭제한다.
 - tb_question의 idx를 전달하여 tb_question_option을 삭제한다. 
 - tb_survey를 삭제한다. 
+
+ 
+$.Each(arr, function(index, param){}) 은 제이쿼리, forEach()는 바닐라 자바스크립트
+$('element').val() 은 제이쿼리 , .value는 바닐라 자바스크립트 

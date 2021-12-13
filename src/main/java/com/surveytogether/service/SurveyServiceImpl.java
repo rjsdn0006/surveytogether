@@ -19,7 +19,7 @@ public class SurveyServiceImpl implements SurveyService {
 	public boolean registerSurvey(SurveyDTO survey) {
 		int queryResult = 0;
 		
-		if(survey.getIdx()==null) {
+		if(survey.getSuIdx()==null) {
 			queryResult = surveyMapper.insertSurvey(survey);
 		}else {
 			queryResult = surveyMapper.updateSurvey(survey);

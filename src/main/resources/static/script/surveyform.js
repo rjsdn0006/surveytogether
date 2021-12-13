@@ -27,8 +27,8 @@ $(document).on("click",".select-success-btn",function(){
  	if(checkedOption=="shortSentence"){
  		addHtml = 
  		`	
-		<fieldset>
-			<p><input type="text" name="" placeholder="단답형 질문" class="input-bar add-question" required/></p>
+		<fieldset class="question">
+			<p><input type="text" name="quTitle" placeholder="단답형 질문" class="input-bar add-question" required/></p>
 			<p><input type="text" placeholder="단답형 답변을 받게됩니다." class="input-bar" disabled/></p>
 			<div class="add-question-btn-box">
 				<button type="button" class="trash-btn" onclick="deleteQuestion(this)"><i class="far fa-trash-alt"></i></button>
@@ -38,7 +38,7 @@ $(document).on("click",".select-success-btn",function(){
  	}else if(checkedOption=="longSentence"){
 		addHtml = 
 		`
-		<fieldset>
+		<fieldset class="question">
 			<p><input type="text" name="" placeholder="장문형 질문" class="input-bar add-question" required/></p>
 			<p><input type="text" name="" placeholder="장문형 답변을 받게됩니다." class="input-bar" disabled/></p>
 			<div class="add-question-btn-box">
@@ -49,7 +49,7 @@ $(document).on("click",".select-success-btn",function(){
 	}else if(checkedOption=="multipleChoice"){
 		addHtml = 
 		`
-		<fieldset>
+		<fieldset class="question">
 			<p><input type="text" name="" placeholder="객관식 질문" class="input-bar add-question" required/></p>
 			<div class="choose-question-container">
 				<p class="choose-question-box">
@@ -67,7 +67,7 @@ $(document).on("click",".select-success-btn",function(){
 	}else if(checkedOption=="checkBox"){
 		addHtml =
 		`
-		<fieldset>
+		<fieldset class="question">
 			<p><input type="text" name="" placeholder="체크박스 질문" class="input-bar add-question" required/></p>
 			<div class="choose-question-container">
 				<p class="choose-question-box">
@@ -85,7 +85,7 @@ $(document).on("click",".select-success-btn",function(){
 	}else if(checkedOption=="dropDown"){
 		addHtml =
 		`
-		<fieldset>
+		<fieldset class="question">
 			<p><input type="text" name="" placeholder="드롭다운 질문" class="input-bar add-question" required/></p>
 			<div class="choose-question-container">
 				<p class="choose-question-box">
@@ -142,6 +142,7 @@ function addOption(param,thisParam){
 }
 
 function removeOption(param){
+	 
 	// param : .choose-question-delete-btn
 	let deleteBtn = $(param);
 	deleteBtn.parent().remove();
@@ -149,6 +150,16 @@ function removeOption(param){
 
  /* ------------------------ 저장영역 ------------------------ */
 function saveSurvey(){
+	
+	// children()은 부모 요소의 바로 아래 단계인 자식만, find()는 부모 태그의 모든 하위 요소선택 가능
+	let fieldsetList = $('fieldset.question');
+	$.each(fieldsetList, function(index, fieldset){
+		console.log(fieldset.find("input[name='quTitle']"));
+	});
+
+	
+	
+	
 	let survey = {
         suTitle : $('.survey-title').val(),
         suDesc : $('.survey-desc').val()
