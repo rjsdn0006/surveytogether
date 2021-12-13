@@ -9,7 +9,7 @@
 		qu_format
 	</sql>
 
-	<insert id="insertQuestion" parameterType="QuestionDTO" useGeneratedKeys="true" keyProperty="idx">
+	<insert id="insertQuestion" parameterType="QuestionDTO" useGeneratedKeys="true" keyProperty="quIdx">
 		INSERT INTO 	tb_question(
 						<include refid="QuestionCol" />
 						)VALUES(

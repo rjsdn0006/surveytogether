@@ -29,6 +29,7 @@ $(document).on("click",".select-success-btn",function(){
  		`	
 		<fieldset class="question">
 			<p><input type="text" name="quTitle" placeholder="단답형 질문" class="input-bar add-question" required/></p>
+			<p><input type="hidden" name="format" value="shortSentence" /></p>
 			<p><input type="text" placeholder="단답형 답변을 받게됩니다." class="input-bar" disabled/></p>
 			<div class="add-question-btn-box">
 				<button type="button" class="trash-btn" onclick="deleteQuestion(this)"><i class="far fa-trash-alt"></i></button>
@@ -39,7 +40,8 @@ $(document).on("click",".select-success-btn",function(){
 		addHtml = 
 		`
 		<fieldset class="question">
-			<p><input type="text" name="" placeholder="장문형 질문" class="input-bar add-question" required/></p>
+			<p><input type="text" name="quTitle" placeholder="장문형 질문" class="input-bar add-question" required/></p>
+			<p><input type="hidden" name="format" value="longSentence" /></p>
 			<p><input type="text" name="" placeholder="장문형 답변을 받게됩니다." class="input-bar" disabled/></p>
 			<div class="add-question-btn-box">
 				<button type="button" class="trash-btn" onclick="deleteQuestion(this)"><i class="far fa-trash-alt"></i></button>
@@ -50,7 +52,8 @@ $(document).on("click",".select-success-btn",function(){
 		addHtml = 
 		`
 		<fieldset class="question">
-			<p><input type="text" name="" placeholder="객관식 질문" class="input-bar add-question" required/></p>
+			<p><input type="text" name="quTitle" placeholder="객관식 질문" class="input-bar add-question" required/></p>
+			<p><input type="hidden" name="format" value="multipleChoice" /></p>
 			<div class="choose-question-container">
 				<p class="choose-question-box">
 					<span class="firstOptionSpace">&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -68,7 +71,8 @@ $(document).on("click",".select-success-btn",function(){
 		addHtml =
 		`
 		<fieldset class="question">
-			<p><input type="text" name="" placeholder="체크박스 질문" class="input-bar add-question" required/></p>
+			<p><input type="text" name="quTitle" placeholder="체크박스 질문" class="input-bar add-question" required/></p>
+			<p><input type="hidden" name="format" value="checkBox" /></p>
 			<div class="choose-question-container">
 				<p class="choose-question-box">
 					<span class="firstOptionSpace">&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -86,7 +90,8 @@ $(document).on("click",".select-success-btn",function(){
 		addHtml =
 		`
 		<fieldset class="question">
-			<p><input type="text" name="" placeholder="드롭다운 질문" class="input-bar add-question" required/></p>
+			<p><input type="text" name="quTitle" placeholder="드롭다운 질문" class="input-bar add-question" required/></p>
+			<p><input type="hidden" name="format" value="dropDown" /></p>
 			<div class="choose-question-container">
 				<p class="choose-question-box">
 					<span class="firstOptionSpace">&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -150,34 +155,42 @@ function removeOption(param){
 
  /* ------------------------ 저장영역 ------------------------ */
 function saveSurvey(){
-	
-	// children()은 부모 요소의 바로 아래 단계인 자식만, find()는 부모 태그의 모든 하위 요소선택 가능
+    // survey에 <- questionList담고 <- questionOptionList담고 , 최종적으로 survey 만을 넘겨주는 방식. 
+
+	let questionList = [];
 	let fieldsetList = $('fieldset.question');
 	$.each(fieldsetList, function(index, fieldset){
-		console.log(fieldset.find("input[name='quTitle']"));
-	});
+		let question = new Object();
+		question.quTitle = fieldset.querySelector("input[name='quTitle']").value;
+		question.quFormat = fieldset.querySelector("input[name='format']").value;
 
+		if(question.quFormat!='shortSentence' && question.quFormat!='longSentence'){
+			// 객관식, 체크박스, 드롭다운이라면 옵션이 존재할것이다. 
+			let optionList = [];
+			let optionWrapper = fieldset.querySelectorAll("input.choose-question-option-desc");
+
+			for(let i=0; i<optionWrapper.length; i++){
+				let option = new Object();
+				option.opName = optionWrapper[i].value;
+				optionList.push(option);
+			}
+			question.questionOptionList = optionList;
+		}
+		questionList.push(question);
+	});
 	
-	
-	
+	let loginUser = $(".userId").val();
 	let survey = {
+        suWriter : loginUser,
         suTitle : $('.survey-title').val(),
-        suDesc : $('.survey-desc').val()
+        suDesc : $('.survey-desc').val(),
+        questionList : questionList
     };
-    let question = {
-	 	//가져왔다고 가정 
-	};
-	let questionOption = {
-		// 가져왔다고 가정
-	};
-    
-    let allData = {"survey":survey,"question":question,"questionOption":questionOption};
-    
-	
+
 	$.ajax({
 		url:"/user/savesurvey",
 		method:"post",
-		data:JSON.stringify(allData),
+		data:JSON.stringify(survey),
 		contentType: "application/json"
 	}).done(function(){
 		alert("완료");	

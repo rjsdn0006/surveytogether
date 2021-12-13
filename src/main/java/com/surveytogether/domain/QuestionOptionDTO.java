@@ -9,4 +9,5 @@ public class QuestionOptionDTO {
 	private Long opIdx;
 	private Long opQuestionIdx;
 	private String opName;
+	
 }

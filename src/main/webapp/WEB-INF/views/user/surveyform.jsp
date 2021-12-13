@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +13,8 @@
 <script src="/script/jquery.bpopup-0.1.1.min.js"></script>
 </head>
 <body>
+<sec:authentication property="principal" var="principal" />
+<input type="hidden" name="userId" value="${principal.username}" class="userId"/>
 <!-- Editor만을 위한 Header -->
 <div class="header-bar survey-form">
 	<div class="header-box">
@@ -25,8 +28,7 @@
 		</div>
 	</div>
 </div>
-
-
+ 
 <!-- 실질적인 설문조사를 만드는 부분 -->
 <div class="wrapper">
 	<form class="surveyForm" action="#" method="POST">

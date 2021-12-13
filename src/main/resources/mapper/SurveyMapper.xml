@@ -11,7 +11,7 @@
 		su_update_time
 	</sql>
 	
-	<insert id="insertSurvey" parameterType="SurveyDTO">
+	<insert id="insertSurvey" parameterType="SurveyDTO" useGeneratedKeys="true" keyProperty="suIdx">
 		INSERT INTO 	tb_survey(
 						<include refid="surveyCol"/>
 						)VALUES(
@@ -19,8 +19,8 @@
 						#{suWriter},
 						#{suTitle},
 						#{suDesc},
-						#{suCreateTime},
-						#{suUpdateTime}
+						NOW(),
+						NULL
 						)
 	</insert>
 	
