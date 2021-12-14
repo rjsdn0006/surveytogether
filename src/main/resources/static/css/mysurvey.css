@@ -1,0 +1,63 @@
+@charset "UTF-8";
+
+a{
+	color: black;
+	text-decoration: none;
+}
+a:visited {
+	color: black;
+	text-decoration: none;
+}
+a:active {
+	color: black;
+	text-decoration: none;
+}
+
+/* --------------------- table영역 디자인 --------------------- */ 
+.survey-list-box{
+	width: 100%;
+}
+.survey-list-table{
+	width: 100%;
+	margin: 0 auto;
+}
+.survey-list-table th{
+	font-size: 1.5rem;
+	border-bottom: 1px dashed #c0c0c0;
+	padding: 0.7rem;
+}
+.survey-list-table th:first-child{
+	border-right: 1px dashed #c0c0c0;
+}
+.survey-list-table td{
+	padding: 0.7rem;
+}
+.survey-list-table td:first-child{
+	border-right: 1px dashed #c0c0c0;
+}
+.title{
+	width: 50%;
+}
+.cTime{
+	width: 25%;
+}
+.uTime{
+	width: 25%;
+}
+
+.create-box{
+	width: 100%;
+	height: 4rem;
+	margin: 2rem 0;
+	color: #ffffff;
+	background-color: #c0c0c0;
+	border-radius: 10px;
+	padding: 1rem;
+	font-size: 1.5rem;
+	font-weight: bold;
+	transition: background-color 0.3s;
+}
+.create-box:hover{
+	cursor: pointer;
+	background-color: #990206;
+}

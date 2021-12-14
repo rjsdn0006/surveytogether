@@ -1,0 +1,10 @@
+- mysurvey에 survey 리스트 가져와서 보여주기 (완료)  
+- survey 항목 클릭하면 수정화면 보여주기 
+
+* 추후에 변경해야 되는사항
+- mysurvey.jsp에서 항목선택시 링크 
+(현재 idx만 전달해주고 있음, 나중에 makeQueryString으로 페이징정보 전달해야함)
+
+* 해야하는거 
+ surveyService에 getoption 메서드 만들기
+ option.jsp 구현하기 

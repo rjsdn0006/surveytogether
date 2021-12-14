@@ -81,4 +81,10 @@ public class SurveyServiceImpl implements SurveyService {
 		return surveyList;
 	}
 
+	@Override
+	public List<QuestionDTO> getQuestionList(Long surveyIdx) {
+		List<QuestionDTO> questionList =  questionMapper.selectQuestionList(surveyIdx);
+		return questionList;
+	}
+
 }

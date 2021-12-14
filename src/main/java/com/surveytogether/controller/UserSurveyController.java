@@ -2,22 +2,21 @@ package com.surveytogether.controller;
 
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 import com.surveytogether.domain.QuestionDTO;
+import com.surveytogether.domain.QuestionOptionDTO;
 import com.surveytogether.domain.SurveyDTO;
-import com.surveytogether.mapper.SurveyMapper;
 import com.surveytogether.service.SurveyService;
-import com.surveytogether.util.Method;
 import com.surveytogether.util.UiUtils;
 
 
@@ -26,10 +25,17 @@ import com.surveytogether.util.UiUtils;
 public class UserSurveyController extends UiUtils {
 	
 	@Autowired
-	SurveyService surveySerivce;
+	SurveyService surveyService;
 	
 	@GetMapping("/mysurvey")
-	public String gotoMysurvey() {
+	public String gotoMysurvey(SurveyDTO survey,Model model) {
+		List<SurveyDTO> surveyList = surveyService.getSurveyList(survey);
+		/* 
+		 * surveyList를 가져올때 SurveyDTO 객체를 넣어주는 이유
+		 * pagination 정보 혹은 검색정보에 따라 보여지는 리스트가 달라지기 때문에 
+		 * 해당 정보를 가진 SurveyDTO 객체를 통으로 넘겨줘서 처리한다. 
+		 */
+		model.addAttribute("surveyList",surveyList);
 		return "/user/mysurvey";
 	}
 	
@@ -38,16 +44,38 @@ public class UserSurveyController extends UiUtils {
 		return "/user/surveyform";
 	}
 	
+	@GetMapping("surveyedit")
+	public String gotoSurveyEditForm(@RequestParam("suIdx") Long suIdx,Model model) {
+		// surveyform에 함께 구현도 가능하지만 코드가 너무 지저분해져서 따로구현
+		SurveyDTO survey = surveyService.getSurveyDetail(suIdx);
+		model.addAttribute("survey",survey);
+		return "/user/surveyedit";
+	}
 	
 	@PostMapping("/savesurvey")
 	public String saveSurvey(@RequestBody SurveyDTO survey,Model model) {
-		
-		boolean result = surveySerivce.registerSurvey(survey);
-		if(result) {
-			return showMessageWithRedirect("등록완료", "/user/mysurvey", Method.GET, null, model);
-		} else {
-			return showMessageWithRedirect("등록실패", "/user/mysurvey", Method.GET, null, model);
-		}
+		surveyService.registerSurvey(survey);
+		return "/user/mysurvey"; // 실질적으로 이코드는 동작하지않고 ajax에서 전달하는 링크로 이동한다.
 	}
+	
+	@GetMapping("/loadquestion")
+	public String loadQuestion(Long suIdx,Model model) {
+		List<QuestionDTO> questionList = surveyService.getQuestionList(suIdx);
+		model.addAttribute("questionList",questionList);
+		/*
+		 * ajax에서 suIdx를 전달해주면 questionList를 가져와 question.jsp에 보내준다.
+		 * question.jsp는 이를 토대로 문서를 만들고 그걸 그대로 다시 ajax로 반환해준다.
+		 * ajax는 반환된 문서를 자신의 문서에 끼워넣으면 된다. 
+		 */
+		return "/user/question";
+	}
+	
+	@GetMapping("/loadoption")
+	public String loadOption (Long quIdx,Model model) {
+		List<QuestionOptionDTO> optionList = surveyService.getOptionList(quIdx);
+		model.addAttribute("optionList",optionList);
 
+		return "/user/option";
+	}
+	
 }

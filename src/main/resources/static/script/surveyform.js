@@ -180,6 +180,7 @@ function saveSurvey(){
 	});
 	
 	let loginUser = $(".userId").val();
+
 	let survey = {
         suWriter : loginUser,
         suTitle : $('.survey-title').val(),
@@ -188,11 +189,34 @@ function saveSurvey(){
     };
 
 	$.ajax({
-		url:"/user/savesurvey",
-		method:"post",
-		data:JSON.stringify(survey),
+		url: "/user/savesurvey",
+		method: "post",
+		data: JSON.stringify(survey),
 		contentType: "application/json"
 	}).done(function(){
-		alert("완료");	
+		alert("등록되었습니다.");
+		location.href = "/user/mysurvey";
+		/* ajax는 비동기식으로 동작하기때문에 url호출후 페이지 이동이 이루어지지 않는다.
+		   그러므로 location.href를 통해서 직접이동시켜줘야 한다.
+		*/
+	});
+}
+
+ /* ------------------------ 수정일 경우 question 불러오기 ------------------------ */
+$(function(){
+	if($(".surveyIdx")!=null){
+		// surveyIdx class가 있을경우 ( 즉 edit 수정작업일경우 )
+		loadQuestion($(".surveyIdx").val());
+	}
+});
+
+function loadQuestion(param){
+	// param에는 suIdx가 들어있다.
+	$.ajax({
+		url: "/user/loadquestion",
+		method: "get",
+		data: {suIdx:param}
+	}).done(function(questionPage){
+		$(".add-survey-box").html(questionPage);
 	});
 }

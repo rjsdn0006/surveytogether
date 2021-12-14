@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>설문조사 만들기</title>
+<title>설문조사 수정</title>
 <link rel="stylesheet" href="/css/surveyform.css" />
 <link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
@@ -15,6 +16,7 @@
 <body>
 <sec:authentication property="principal" var="principal" />
 <input type="hidden" name="userId" value="${principal.username}" class="userId"/>
+<input type="hidden" name="surveyIdx" value="${survey.suIdx}" class="surveyIdx" />
 
 <!-- Editor만을 위한 Header -->
 <div class="header-bar survey-form">
@@ -35,12 +37,13 @@
 	<form class="surveyForm" action="#" method="POST">
 		<fieldset>
 			<legend>글제목</legend>
-			<p><input type="text" name="suTitle" placeholder="설문지 제목" class="input-bar survey-title" required/></p>
-			<p><textarea name="suDesc" placeholder="설문지 설명" class="input-bar survey-desc"></textarea></p>
+			<p><input type="text" name="suTitle" placeholder="설문지 제목" class="input-bar survey-title" value="${survey.suTitle}" required/></p>
+			<p><textarea name="suDesc" placeholder="설문지 설명" class="input-bar survey-desc">${survey.suDesc}</textarea></p>
 		</fieldset>
+		
 		<!-- 추가질문목록이 추가되는 영역 -->
 		<div class="add-survey-box">
-
+			
 		</div>
 	</form>
 	
