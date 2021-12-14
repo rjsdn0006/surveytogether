@@ -60,20 +60,21 @@ public class UserSurveyController extends UiUtils {
 	
 	@GetMapping("/loadquestion")
 	public String loadQuestion(Long suIdx,Model model) {
-		List<QuestionDTO> questionList = surveyService.getQuestionList(suIdx);
-		model.addAttribute("questionList",questionList);
 		/*
 		 * ajax에서 suIdx를 전달해주면 questionList를 가져와 question.jsp에 보내준다.
 		 * question.jsp는 이를 토대로 문서를 만들고 그걸 그대로 다시 ajax로 반환해준다.
 		 * ajax는 반환된 문서를 자신의 문서에 끼워넣으면 된다. 
 		 */
+		List<QuestionDTO> questionList = surveyService.getQuestionList(suIdx);
+		model.addAttribute("questionList",questionList);
 		return "/user/question";
 	}
 	
 	@GetMapping("/loadoption")
-	public String loadOption (Long quIdx,Model model) {
+	public String loadOption (Long quIdx,String quFormat,Model model) {
 		List<QuestionOptionDTO> optionList = surveyService.getOptionList(quIdx);
 		model.addAttribute("optionList",optionList);
+		model.addAttribute("quFormat",quFormat);
 
 		return "/user/option";
 	}

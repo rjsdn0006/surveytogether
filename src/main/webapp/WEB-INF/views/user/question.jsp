@@ -9,6 +9,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </head>
 <body>
+
 <!-- questionList가 전달되어 question 목록을 만드는 페이지 -->
 
 <c:forEach items="${questionList}" var="que" varStatus="status">
@@ -78,10 +79,11 @@ function loadOption(){
 		if(question.quFormat!='shortSentence' && question.quFormat!='longSentence'){
 			// 객관식, 체크박스, 드롭다운이라면 옵션이 존재할것이다. 
 			let questionIdx = fieldset.querySelector("input[name='questionIdx']");
+			let questionFormat = fieldset.querySelector("input[name='format']");
 			$.ajax({
 				url: "/user/loadoption",
 				method: "get",
-				data: {quIdx:questionIdx}
+				data: {quIdx:questionIdx, quFormat:questionFormat}
 			}).done(function(optionPage){
 				$(".choose-question-container").html(optionPage);
 			});
