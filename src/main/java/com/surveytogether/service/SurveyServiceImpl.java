@@ -12,6 +12,7 @@ import com.surveytogether.domain.SurveyDTO;
 import com.surveytogether.mapper.QuestionMapper;
 import com.surveytogether.mapper.QuestionOptionMapper;
 import com.surveytogether.mapper.SurveyMapper;
+import com.surveytogether.paging.PaginationInfo;
 
 @Service
 public class SurveyServiceImpl implements SurveyService {
@@ -95,6 +96,12 @@ public class SurveyServiceImpl implements SurveyService {
 	public List<SurveyDTO> getMySurveyList(SurveyDTO survey) {
 		List<SurveyDTO> surveyList = Collections.emptyList();
 		int count = surveyMapper.selectMySurveyTotalCount(survey);
+		
+		PaginationInfo paginationInfo = new PaginationInfo(survey);
+		paginationInfo.setTotalRecordCount(count);
+		survey.setPaginationInfo(paginationInfo);
+		
+		
 		if(count>0) {
 			surveyList = surveyMapper.selectMySurveyList(survey);
 		}
@@ -104,6 +111,11 @@ public class SurveyServiceImpl implements SurveyService {
 	public List<SurveyDTO> getSurveyList(SurveyDTO survey) {
 		List<SurveyDTO> surveyList = Collections.emptyList();
 		int count = surveyMapper.selectSurveyTotalCount(survey);
+		
+		PaginationInfo paginationInfo = new PaginationInfo(survey);
+		paginationInfo.setTotalRecordCount(count);
+		survey.setPaginationInfo(paginationInfo);
+		
 		if(count>0) {
 			surveyList = surveyMapper.selectSurveyList(survey);
 		}

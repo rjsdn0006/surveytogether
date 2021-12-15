@@ -12,45 +12,12 @@ a:active {
 	color: black;
 	text-decoration: none;
 }
-
-/* --------------------- table영역 디자인 --------------------- */ 
-.survey-list-box{
-	width: 100%;
-}
-.survey-list-table{
-	width: 100%;
-	margin: 0 auto;
-}
-.survey-list-table th{
-	font-size: 1.5rem;
-	border-bottom: 1px dashed #c0c0c0;
-	padding: 0.7rem;
-}
-.survey-list-table th:first-child{
-	border-right: 1px dashed #c0c0c0;
-}
-.survey-list-table td{
-	padding: 0.7rem;
-}
-.survey-list-table td:first-child{
-	border-right: 1px dashed #c0c0c0;
-}
-.title{
-	width: 50%;
-}
-.cTime{
-	width: 25%;
-}
-.uTime{
-	width: 25%;
-}
-
-/* --------------------- create new survey 영역 디자인 --------------------- */ 
+/* --------------------- create-box 영역 디자인 --------------------- */ 
 
 .create-box{
 	width: 100%;
 	height: 4rem;
-	margin: 3rem 0;
+	margin: 3rem auto;
 	color: #ffffff;
 	background-color: #c0c0c0;
 	border-radius: 10px;
@@ -62,4 +29,100 @@ a:active {
 .create-box:hover{
 	cursor: pointer;
 	background-color: #990206;
+}
+
+
+/* --------------------- table영역 디자인 --------------------- */ 
+.survey-list-box{
+	width: 100%;
+	height : 540px;
+}
+.survey-list-table{
+	width: 100%;
+	margin: 0 auto;
+}
+.survey-list-table th{
+	font-size: 1.5rem;
+	border-bottom: 1px dashed #c0c0c0;
+	padding: 0.7rem;
+}
+.survey-list-table th:nth-child(2){
+	border-right: 1px dashed #c0c0c0;
+	border-left: 1px dashed #c0c0c0;
+}
+.survey-list-table td{
+	padding: 0.7rem;
+}
+.survey-list-table td:nth-child(2){
+	border-right: 1px dashed #c0c0c0;
+	border-left: 1px dashed #c0c0c0;
+}
+.number{
+	width: 10%	
+}
+.title{
+	width: 50%;
+}
+.cTime{
+	width: 20%;
+}
+.uTime{
+	width: 250%;
+}
+
+/* --------------------- pagination 영역 디자인 --------------------- */ 
+.pagination-box{
+	width: 100%;
+	margin-top: 3rem;
+}
+ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	width: 30%;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-around;
+}
+
+li {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	cursor: pointer;
+	color: #dddddd;
+}
+.selectPage {
+	color : #2497c8;
+	font-weight: bold;
+}
+/* --------------------- search-box 영역 디자인 --------------------- */ 
+.search-box{
+	margin-top: 2rem;
+	text-align: center;
+}
+.searchType{
+	padding: 0.3rem;
+	border: none;
+}
+.searchType:focus{
+	outline: none;
+}
+.searchKeyword{
+	padding: 0.3rem;
+	border: none;
+}
+.searchKeyword:focus{
+	outline: none;
+}
+.searchBtn{
+	border:none;
+	padding: 0.3rem;
+	background-color: #c0c0c0;
+	color: #ffffff;
+	transition: background-color 0.3s; 
+}
+.searchBtn:hover {
+	background-color: #1e7ba4;
+	cursor: pointer;
 }

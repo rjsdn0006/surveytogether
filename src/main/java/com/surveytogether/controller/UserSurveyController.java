@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,7 +33,7 @@ public class UserSurveyController extends UiUtils {
 	
 	@GetMapping("/mysurvey")
 	public String gotoMysurvey(SurveyDTO survey,Model model,Principal principal) {
-		
+	
 		if(survey.getSuWriter() == null) {
 			// 나의 survey 페이지 이므로, 내가작성한 survey만 보여야한다.
 			survey.setSuWriter(principal.getName());
@@ -44,6 +45,7 @@ public class UserSurveyController extends UiUtils {
 		 * 해당 정보를 가진 SurveyDTO 객체를 통으로 넘겨줘서 처리한다. 
 		 */
 		model.addAttribute("surveyList",surveyList);
+		model.addAttribute("survey",survey);
 		return "/user/mysurvey";
 	}
 	

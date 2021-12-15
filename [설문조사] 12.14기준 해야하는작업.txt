@@ -11,7 +11,9 @@
 - 자유게시판만들기
 
 * 추후에 변경해야 되는사항
-- mysurvey.jsp에서 항목선택시 링크 
-(현재 idx만 전달해주고 있음, 나중에 makeQueryString으로 페이징정보 전달해야함)
 - surveyboard.jsp에서 항목선택시 링크 
 (현재 idx만 전달해주고 있음, 나중에 makeQueryString으로 페이징정보 전달해야함)
+- survey 수정이나 새글쓸때 뒤로가기하면 makerQueryString 전달하기 
+
+* 궁금한점 
+surveyDTO를 modelAttribute로 자동으로 매핑되는게 아닌가 ? ;;

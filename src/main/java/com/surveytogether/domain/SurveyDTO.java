@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class SurveyDTO {
+public class SurveyDTO extends CommonDTO{
 	private Long suIdx;
 	private String suWriter;
 	private String suTitle;

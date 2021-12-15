@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CommonMapper">
+
+	<sql id="paging">
+		LIMIT #{paginationInfo.firstRecordIndex}, #{recordsPerPage}
+	</sql>
+	
+	<sql id="search">
+		<if test="searchKeyword != null and searchKeyword != ''">
+			<choose>
+				<when test="searchType != null and searchType != ''">
+					<choose>
+						<when test="'title'.equals(searchType)">
+							AND su_title LIKE CONCAT('%',#{searchKeyword},'%')
+						</when>
+						<when test="'writer'.equals(searchType)">
+							AND su_writer LIKE CONCAT('%',#{searchKeyword},'%')
+						</when>
+					</choose>
+				</when>
+				<otherwise>
+					AND(
+						 su_title LIKE CONCAT('%',#{searchKeyword},'%') OR
+						 su_writer LIKE CONCAT('%',#{searchKeyword},'%')
+					)
+				</otherwise>
+			</choose>
+		</if>
+	</sql>
+</mapper>
