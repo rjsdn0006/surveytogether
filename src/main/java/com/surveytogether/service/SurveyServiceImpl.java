@@ -30,7 +30,7 @@ public class SurveyServiceImpl implements SurveyService {
 		List<QuestionDTO> questionList = survey.getQuestionList();
 		List<QuestionOptionDTO> questionOptionList = Collections.emptyList();
 		
-				
+		System.out.println(survey.getSuIdx());
 		if(survey.getSuIdx()==null) { // idx가 없으니 새글
 			queryResult = surveyMapper.insertSurvey(survey); // 1. survey를 등록해준다. 이때, suIdx값이 survey에 저장된다. (useGeneratedKey 사용했으므로)
 			
@@ -49,8 +49,28 @@ public class SurveyServiceImpl implements SurveyService {
 			}
 			
 		}else {
-			// idx가 있으니 수정
+			/* idx가 있으니 수정작업
+			 * survey는 그대로 업데이트만 해주고 question과 option은 다삭제하고 새로등록하는 방식을 사용한다.
+			 * 현재 나에게 존재하는 suIdx. 이걸통해서 quesiton을 모두삭제할수있다.
+			 * option은 question과 CASCADE 로 연결되어있어 자동삭제된다. 
+			 */
 			queryResult = surveyMapper.updateSurvey(survey);
+			questionMapper.deleteQuestionAll(survey.getSuIdx()); // question과 option 다같이 삭제.
+			
+			for(QuestionDTO q:questionList) { 
+				q.setQuSurveyIdx(survey.getSuIdx());
+				questionMapper.insertQuestion(q); 
+				
+				if(q.getQuestionOptionList() != null) {
+					questionOptionList = q.getQuestionOptionList(); 
+				
+					for(QuestionOptionDTO o:questionOptionList) { 
+						o.setOpQuestionIdx(q.getQuIdx());
+						questionOptionMapper.insertQuestionOption(o);
+					}
+				}
+			}
+			
 		}
 		return (queryResult==1)?true:false;
 	}
@@ -71,6 +91,15 @@ public class SurveyServiceImpl implements SurveyService {
 		return surveyMapper.selectSurveyDetail(idx);
 	}
 
+	@Override
+	public List<SurveyDTO> getMySurveyList(SurveyDTO survey) {
+		List<SurveyDTO> surveyList = Collections.emptyList();
+		int count = surveyMapper.selectMySurveyTotalCount(survey);
+		if(count>0) {
+			surveyList = surveyMapper.selectMySurveyList(survey);
+		}
+		return surveyList;
+	}
 	@Override
 	public List<SurveyDTO> getSurveyList(SurveyDTO survey) {
 		List<SurveyDTO> surveyList = Collections.emptyList();

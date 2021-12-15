@@ -11,6 +11,7 @@ public interface QuestionMapper {
 	public int insertQuestion(QuestionDTO question);
 	public int updateQuestion(QuestionDTO question);
 	public int deleteQuestion(Long idx);
+	public int deleteQuestionAll(Long surveyIdx);
 	public List<QuestionDTO> selectQuestionList(Long surveyIdx);
 	public QuestionDTO selectQuestionDetail(Long idx);
 }

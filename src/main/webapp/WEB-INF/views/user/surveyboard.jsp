@@ -6,8 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>나의설문조사</title>
-<link rel="stylesheet" href="/css/mysurvey.css" />
+<title>설문조사참여</title>
+<link rel="stylesheet" href="/css/surveyboard.css" />
 </head>
 <body>
 
@@ -15,10 +15,6 @@
  <sec:authentication property="principal" var="user" /> 
  	
 <div class="wrapper">
-
-	<div class="create-box" onclick="location.href='/user/surveyform'">
-		CREATE NEW SURVEY
-	</div>
 	
 	<div class="search-box">
 		
@@ -27,13 +23,15 @@
 	<div class="survey-list-box">
 		<table class="survey-list-table">
 			<tr>
-				<th>TITLE</th>
-				<th>CREATE TIME</th>
-				<th>UPDATE TIME</th>
+				<th class="writer">WRITER</th>
+				<th class="title">TITLE</th>
+				<th class="cTime">CREATE TIME</th>
+				<th class="uTime">UPDATE TIME</th>
 			</tr>
 			<c:forEach items="${surveyList}" var="survey" varStatus="status">
 				<tr>
-					<td class="title"><a href="/user/surveyedit?suIdx=${survey.suIdx}">${survey.suTitle}</a></td>
+					<td class="writer">${survey.suWriter}</td>
+					<td class="title"><a href="#">${survey.suTitle}</a></td>
 					<td class="cTime">${survey.suCreateTime}</td>
 					<td class="uTime">${survey.suUpdateTime}</td>
 				</tr>

@@ -31,6 +31,11 @@
 		WHERE 			qu_idx = #{quIdx}
 	</delete>
 	
+	<delete id="deleteQuestionAll" parameterType="long">
+		DELETE FROM 	tb_question 
+		WHERE 			qu_survey_idx = #{quSurveyIdx}
+	</delete>
+	
 	<select id="selectQuestionDetail" parameterType="long" resultType="QuestionDTO">
 		SELECT 	<include refid="QuestionCol" />
 		FROM 	tb_question

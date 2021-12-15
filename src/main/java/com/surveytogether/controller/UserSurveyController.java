@@ -1,6 +1,7 @@
 package com.surveytogether.controller;
 
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +28,16 @@ public class UserSurveyController extends UiUtils {
 	@Autowired
 	SurveyService surveyService;
 	
+	// mysurvey 영역 --------------------------------------------------------------
+	
 	@GetMapping("/mysurvey")
-	public String gotoMysurvey(SurveyDTO survey,Model model) {
-		List<SurveyDTO> surveyList = surveyService.getSurveyList(survey);
+	public String gotoMysurvey(SurveyDTO survey,Model model,Principal principal) {
+		
+		if(survey.getSuWriter() == null) {
+			// 나의 survey 페이지 이므로, 내가작성한 survey만 보여야한다.
+			survey.setSuWriter(principal.getName());
+		}
+		List<SurveyDTO> surveyList = surveyService.getMySurveyList(survey);
 		/* 
 		 * surveyList를 가져올때 SurveyDTO 객체를 넣어주는 이유
 		 * pagination 정보 혹은 검색정보에 따라 보여지는 리스트가 달라지기 때문에 
@@ -46,7 +54,7 @@ public class UserSurveyController extends UiUtils {
 	
 	@GetMapping("surveyedit")
 	public String gotoSurveyEditForm(@RequestParam("suIdx") Long suIdx,Model model) {
-		// surveyform에 함께 구현도 가능하지만 코드가 너무 지저분해져서 따로구현
+		// surveyform에 함께 구현도 가능하지만 페이징까지 들어가면 코드가 너무 지저분해져서 따로구현
 		SurveyDTO survey = surveyService.getSurveyDetail(suIdx);
 		model.addAttribute("survey",survey);
 		return "/user/surveyedit";
@@ -75,8 +83,15 @@ public class UserSurveyController extends UiUtils {
 		List<QuestionOptionDTO> optionList = surveyService.getOptionList(quIdx);
 		model.addAttribute("optionList",optionList);
 		model.addAttribute("quFormat",quFormat);
-
 		return "/user/option";
 	}
 	
+	// surveyboard 영역 --------------------------------------------------------------
+	
+	@GetMapping("/surveyboard")
+	public String gotoSurveyBoard(SurveyDTO survey,Model model) {
+		List<SurveyDTO> surveyList = surveyService.getSurveyList(survey);
+		model.addAttribute("surveyList",surveyList);
+		return "/user/surveyboard";
+	}
 }

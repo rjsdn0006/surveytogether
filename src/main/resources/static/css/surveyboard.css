@@ -15,6 +15,7 @@ a:active {
 
 /* --------------------- table영역 디자인 --------------------- */ 
 .survey-list-box{
+	margin-top: 2rem;
 	width: 100%;
 }
 .survey-list-table{
@@ -26,40 +27,27 @@ a:active {
 	border-bottom: 1px dashed #c0c0c0;
 	padding: 0.7rem;
 }
-.survey-list-table th:first-child{
+.survey-list-table th:nth-child(2){
+	border-left: 1px dashed #c0c0c0;
 	border-right: 1px dashed #c0c0c0;
 }
 .survey-list-table td{
 	padding: 0.7rem;
 }
-.survey-list-table td:first-child{
+.survey-list-table td:nth-child(2){
+	border-left: 1px dashed #c0c0c0;
 	border-right: 1px dashed #c0c0c0;
 }
 .title{
-	width: 50%;
+	width: 40%;
+}
+.writer{
+	width: 20%;
 }
 .cTime{
-	width: 25%;
+	width: 20%;
 }
 .uTime{
-	width: 25%;
+	width: 20%;
 }
 
-/* --------------------- create new survey 영역 디자인 --------------------- */ 
-
-.create-box{
-	width: 100%;
-	height: 4rem;
-	margin: 3rem 0;
-	color: #ffffff;
-	background-color: #c0c0c0;
-	border-radius: 10px;
-	padding: 1rem;
-	font-size: 1.5rem;
-	font-weight: bold;
-	transition: background-color 0.3s;
-}
-.create-box:hover{
-	cursor: pointer;
-	background-color: #990206;
-}

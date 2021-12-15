@@ -20,7 +20,7 @@
 			<i class="fas fa-comments free-board-icon"></i>
 			<p class="menu-desc">자유게시판</p>
 		</div>
-		<div class="home-menu">
+		<div class="home-menu" onclick="movePage('/user/surveyboard')">
 			<i class="far fa-clipboard survey-board-icon"></i>
 			<p class="menu-desc">설문조사참여</p>
 		</div>

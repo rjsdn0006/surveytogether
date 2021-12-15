@@ -10,6 +10,7 @@ public interface SurveyService {
 	public boolean registerSurvey(SurveyDTO survey);
 	public boolean deleteSurvey(Long idx);
 	public SurveyDTO getSurveyDetail(Long idx);
+	public List<SurveyDTO> getMySurveyList(SurveyDTO survey);
 	public List<SurveyDTO> getSurveyList(SurveyDTO survey);
 	public List<QuestionDTO> getQuestionList(Long surveyIdx);
 	public List<QuestionOptionDTO> getOptionList(Long questionIdx);
