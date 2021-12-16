@@ -69,20 +69,33 @@ public class UserSurveyController extends UiUtils {
 	}
 	
 	@GetMapping("/loadquestion")
-	public String loadQuestion(Long suIdx,Model model) {
+	public String loadQuestion(Long suIdx, @RequestParam(value="state", required = false)String state, Model model) {
 		/*
 		 * ajax에서 suIdx를 전달해주면 questionList를 가져와 question.jsp에 보내준다.
 		 * question.jsp는 이를 토대로 문서를 만들고 그걸 그대로 다시 ajax로 반환해준다.
 		 * ajax는 반환된 문서를 자신의 문서에 끼워넣으면 된다. 
 		 */
 		List<QuestionDTO> questionList = surveyService.getQuestionList(suIdx);
+		if(state!=null && state!="") {
+			// 만약 state가 존재한다면, 다른사람이 설문조사에 참여하는 경우이다.
+			model.addAttribute("state",state);
+		}
 		model.addAttribute("questionList",questionList);
 		return "/user/question";
 	}
 	
 	@GetMapping("/loadoption")
-	public String loadOption (Long quIdx,String quFormat,Model model) {
+	public String loadOption (Long quIdx,String quFormat, @RequestParam(value="state", required = false)String state, Model model) {
 		List<QuestionOptionDTO> optionList = surveyService.getOptionList(quIdx);
+		if(state!=null && state!="") {
+			model.addAttribute("state",state);
+			model.addAttribute("questionIdx",quIdx);
+			/*
+			 * 다른사람이 참여하는 형식이라면 question당 option의 name을 묶어줄요소가 필요하다.
+			 * ( radio 같은경우 name을 기준으로 하나만 선택이 되므로 )
+			 * 이때 사용하기위해 quIdx를 보내준다.
+			 */
+		}
 		model.addAttribute("optionList",optionList);
 		model.addAttribute("quFormat",quFormat);
 		return "/user/option";
@@ -95,5 +108,11 @@ public class UserSurveyController extends UiUtils {
 		List<SurveyDTO> surveyList = surveyService.getSurveyList(survey);
 		model.addAttribute("surveyList",surveyList);
 		return "/user/surveyboard";
+	}
+	@GetMapping("/surveydo")
+	public String gotoSurveyDo(@RequestParam("suIdx") Long suIdx,Model model) {
+		SurveyDTO survey = surveyService.getSurveyDetail(suIdx);
+		model.addAttribute("survey",survey);
+		return "/user/surveydo";
 	}
 }

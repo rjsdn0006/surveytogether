@@ -17,9 +17,9 @@ a:active {
 .create-box{
 	width: 100%;
 	height: 4rem;
-	margin: 3rem auto;
+	margin: 2rem auto;
 	color: #ffffff;
-	background-color: #c0c0c0;
+	background-color: #6d6d6d;
 	border-radius: 10px;
 	padding: 1rem;
 	font-size: 1.5rem;
@@ -33,9 +33,12 @@ a:active {
 
 
 /* --------------------- table영역 디자인 --------------------- */ 
+table{
+	border-collapse: collapse;
+}
 .survey-list-box{
 	width: 100%;
-	height : 540px;
+	height : 600px;
 }
 .survey-list-table{
 	width: 100%;
@@ -43,37 +46,33 @@ a:active {
 }
 .survey-list-table th{
 	font-size: 1.5rem;
-	border-bottom: 1px dashed #c0c0c0;
-	padding: 0.7rem;
+	padding: 1rem;
+	border-bottom: 1px solid #c0c0c0;
 }
-.survey-list-table th:nth-child(2){
-	border-right: 1px dashed #c0c0c0;
-	border-left: 1px dashed #c0c0c0;
+.survey-list-table tr:nth-child(even){
+	background-color: #f4f4f4;
 }
+
 .survey-list-table td{
-	padding: 0.7rem;
-}
-.survey-list-table td:nth-child(2){
-	border-right: 1px dashed #c0c0c0;
-	border-left: 1px dashed #c0c0c0;
+	padding: 1rem;
 }
 .number{
-	width: 10%	
+	width: 15%	
 }
 .title{
-	width: 50%;
+	width: 45%;
 }
 .cTime{
 	width: 20%;
 }
 .uTime{
-	width: 250%;
+	width: 20%;
 }
 
 /* --------------------- pagination 영역 디자인 --------------------- */ 
 .pagination-box{
 	width: 100%;
-	margin-top: 3rem;
+	margin-top: 2rem;
 }
 ul {
 	list-style: none;
@@ -82,13 +81,13 @@ ul {
 	width: 30%;
 	margin: 0 auto;
 	display: flex;
-	justify-content: space-around;
+	justify-content: center;
 }
 
 li {
 	list-style: none;
 	margin: 0;
-	padding: 0;
+	padding: 0.5rem;
 	cursor: pointer;
 	color: #dddddd;
 }
@@ -98,7 +97,7 @@ li {
 }
 /* --------------------- search-box 영역 디자인 --------------------- */ 
 .search-box{
-	margin-top: 2rem;
+	margin-top: 1rem;
 	text-align: center;
 }
 .searchType{

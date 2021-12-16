@@ -13,7 +13,11 @@ a:active {
 	text-decoration: none;
 }
 
+
 /* --------------------- table영역 디자인 --------------------- */ 
+table{
+	border-collapse: collapse;
+}
 .survey-list-box{
 	margin-top: 2rem;
 	width: 100%;
@@ -24,20 +28,17 @@ a:active {
 }
 .survey-list-table th{
 	font-size: 1.5rem;
-	border-bottom: 1px dashed #c0c0c0;
-	padding: 0.7rem;
+	padding: 1rem;
+	border-bottom: 1px solid #c0c0c0;
 }
-.survey-list-table th:nth-child(2){
-	border-left: 1px dashed #c0c0c0;
-	border-right: 1px dashed #c0c0c0;
+.survey-list-table tr:nth-child(even){
+	background-color: #f4f4f4;
 }
+
 .survey-list-table td{
-	padding: 0.7rem;
+	padding: 1rem;
 }
-.survey-list-table td:nth-child(2){
-	border-left: 1px dashed #c0c0c0;
-	border-right: 1px dashed #c0c0c0;
-}
+
 .title{
 	width: 40%;
 }

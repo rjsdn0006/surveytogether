@@ -15,11 +15,7 @@
  <sec:authentication property="principal" var="user" /> 
  	
 <div class="wrapper">
-	
-	<div class="search-box">
-		
-	</div>
-	
+
 	<div class="survey-list-box">
 		<table class="survey-list-table">
 			<tr>
@@ -29,9 +25,9 @@
 				<th class="uTime">UPDATE TIME</th>
 			</tr>
 			<c:forEach items="${surveyList}" var="survey" varStatus="status">
-				<tr>
+				<tr class="rowValue">
 					<td class="writer">${survey.suWriter}</td>
-					<td class="title"><a href="#">${survey.suTitle}</a></td>
+					<td class="title"><a href="/user/surveydo?suIdx=${survey.suIdx}">${survey.suTitle}</a></td>
 					<td class="cTime">${survey.suCreateTime}</td>
 					<td class="uTime">${survey.suUpdateTime}</td>
 				</tr>
@@ -42,6 +38,10 @@
 	
 	<div class="pagination-box">
 	
+	</div>
+	
+	<div class="search-box">
+		
 	</div>
 	
 </div>

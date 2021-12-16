@@ -1,0 +1,148 @@
+@charset "UTF-8";
+
+* { 
+	font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+input:disabled{
+	background-color: #ffffff;
+}
+textarea:disabled{
+	background-color: #ffffff;
+}
+
+/* --------------------- head영역 디자인 --------------------- */ 
+
+.header-box span {
+	text-decoration: none;
+	color: #ffffff;
+}
+
+.header-box a {
+	text-decoration: none;
+	color: #ffffff;
+}
+
+.header-box a:visited {
+	text-decoration: none;
+	color: #ffffff;
+}
+.header-box a:active {
+	text-decoration: none;
+	color: #ffffff;
+}
+
+.survey-form{
+	width:100%;
+	height:60px;
+	background-color: #309816;
+}
+
+.header-box{
+	width:100%;
+	height:100%;
+	margin:0 auto;
+	display: flex;
+	justify-content: space-between;
+	padding : 0 1.5rem;
+}
+
+.left-box{
+	color:#ffffff;
+	font-weight:bold;
+	font-size: 2rem;
+	line-height: 60px;
+}
+.right-box{
+	color:#ffffff;
+	font-size: 1rem;
+	line-height: 60px;
+}
+.menu1{
+	margin-right:30px;
+}
+.menu2{
+	margin-right:30px;
+}
+
+.wrapper{
+	width:100%;
+	height:100%;
+	margin:0 auto;
+	text-align: center;
+}
+
+/* --------------------- form영역 디자인 --------------------- */ 
+
+.surveyForm{
+	margin-top:1rem;	
+}
+legend{
+	display: none;
+}
+fieldset {
+	border: none;
+}
+.surveyWriter{
+	width: 50%;
+	margin: 0 auto;
+	text-align: right;
+	color: #c0c0c0;
+}
+textarea{
+	resize: none;
+}
+.input-bar{
+	width: 50%;
+	padding: 0.5rem;
+	border: none;
+}
+.input-bar:focus{
+	outline: none;
+}
+.survey-title{
+	font-size: 2rem;
+	font-weight: bold;
+	border-bottom: 1px solid  #c0c0c0;
+}
+.add-question{
+	margin-top: 1rem;
+	margin-bottom: 0.5rem;
+	padding-top: 1rem;
+	border-top: 1px dashed #dfdfdf;
+	font-size: 1.1rem;
+	font-weight: bold;
+}
+.long-answer{
+	border: 1px solid #e9e9e9;
+	height: 6rem;
+}
+.choose-question-box{
+	width:50%;
+	margin:0 auto;
+	text-align: left;
+	padding: 0.2rem;
+}
+.choose-question-option-desc{
+	padding: 0.5rem;
+	width: 80%;
+}
+.firstOptionSpace{
+	cursor: default;
+}
+
+select{
+	border: none;
+	padding: 0.3rem;
+}
+
+@media only screen and (min-width:1200px) {
+	.wrapper{
+		max-width: 1200px;
+	}
+	.header-box{
+		max-width: 1200px;
+	}
+}

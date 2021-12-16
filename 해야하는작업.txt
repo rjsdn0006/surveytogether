@@ -1,19 +1,19 @@
-
 * 작업목록 
-- mysurvey에 survey 리스트 가져와서 보여주기 (완료)  
-- survey 항목 클릭하면 수정화면 보여주기 (완료)
-- survey 항목 수정한것 저장,반영하기 (완료)
-- mysurvey.jsp 페이징작업, 검색작업완료하기 
-- 모두의 survey를 볼수있는 리스트페이지 만들기 (완료)
 - 자신이 작성한 survey는 참여불가하고 형식만 볼수있게 만들기
 - 타인이 작성한 survey는 참여가능하게 만들기 
 - 타인이 작성한 survey에 참여하고 저장 
-- 자유게시판만들기
+
 
 * 추후에 변경해야 되는사항
 - surveyboard.jsp에서 항목선택시 링크 
 (현재 idx만 전달해주고 있음, 나중에 makeQueryString으로 페이징정보 전달해야함)
 - survey 수정이나 새글쓸때 뒤로가기하면 makerQueryString 전달하기 
+- detail에서 저장하기 만들기
 
-* 궁금한점 
-surveyDTO를 modelAttribute로 자동으로 매핑되는게 아닌가 ? ;;
+
+response구현 
+- AnswerDTO 
+String answerUser // 답변한 유저 id 
+Long questionIdx // 어떤 question의 답변인지 식별
+String strAnswer // 문장형 답변을 받을 곳
+List<String> selAnswer // 선택형 답변을 받을 곳 (체크박스는 다수가 가능하므로 list)

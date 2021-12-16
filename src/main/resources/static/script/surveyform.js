@@ -1,3 +1,11 @@
+/* ------------------------ top버튼 영역 ------------------------ */
+
+$(document).on("click",".top-btn",function(){
+	$('html, body').animate({
+		scrollTop: 0
+	}, 300);
+})
+
 /* ------------------------ +버튼 Modal영역 ------------------------ */
 
 $(document).on("click",".add-btn",function(){
@@ -247,7 +255,7 @@ function loadOption(){
 				method: "get",
 				data: {quIdx:questionIdx, quFormat:questionFormat}
 			}).done(function(optionPage){
-				$(".choose-question-container").html(optionPage);
+				fieldset.querySelector(".choose-question-container").innerHTML = optionPage;
 			});
 		}
 	});
