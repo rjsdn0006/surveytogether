@@ -8,7 +8,7 @@
 			<c:when test="${quFormat eq 'multipleChoice'}">
 				<c:forEach items="${optionList}" var="opt" varStatus="status">
 					<p class="choose-question-box">
-						<input type="radio" name="${questionIdx}" id="${opt.opName}" value="${opt.opName}"/>
+						<input type="radio" name="${questionIdx}" id="${opt.opName}" class="option" value="${opt.opName}"/>
 						<label for="${opt.opName}" class="choose-question-option-desc">${opt.opName}</label>
 					</p>
 				</c:forEach>
@@ -16,14 +16,14 @@
 			<c:when test="${quFormat eq 'checkBox'}">
 				<c:forEach items="${optionList}" var="opt" varStatus="status">
 					<p class="choose-question-box">
-						<input type="checkBox" name="option" id="${opt.opName}" value="${opt.opName}"/>
+						<input type="checkBox" name="option" id="${opt.opName}"  class="option" value="${opt.opName}"/>
 						<label for="${opt.opName}" class="choose-question-option-desc">${opt.opName}</label>
 					</p>
 				</c:forEach>
 			</c:when>
 			<c:when test="${quFormat eq 'dropDown'}">
 				<p class="choose-question-box">
-					<select name="${questionIdx}">
+					<select name="${questionIdx}" class="select-box">
 						<c:forEach items="${optionList}" var="opt" varStatus="status">
 							<option value="${opt.opName}">${opt.opName}</option>
 						</c:forEach>

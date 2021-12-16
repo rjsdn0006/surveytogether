@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
+import com.surveytogether.domain.AnswerDTO;
 import com.surveytogether.domain.QuestionDTO;
 import com.surveytogether.domain.QuestionOptionDTO;
 import com.surveytogether.domain.SurveyDTO;
@@ -109,10 +109,17 @@ public class UserSurveyController extends UiUtils {
 		model.addAttribute("surveyList",surveyList);
 		return "/user/surveyboard";
 	}
+	
 	@GetMapping("/surveydo")
 	public String gotoSurveyDo(@RequestParam("suIdx") Long suIdx,Model model) {
 		SurveyDTO survey = surveyService.getSurveyDetail(suIdx);
 		model.addAttribute("survey",survey);
 		return "/user/surveydo";
+	}
+	
+	@PostMapping("/saveanswer")
+	public String saveAnswer(@RequestBody AnswerDTO answer,Model model) {
+		surveyService.saveAnswer(answer);
+		return "/user/surveyboard";
 	}
 }

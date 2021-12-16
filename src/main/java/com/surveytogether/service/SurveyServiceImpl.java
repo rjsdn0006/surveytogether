@@ -6,11 +6,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.surveytogether.domain.AnswerDTO;
 import com.surveytogether.domain.QuestionDTO;
 import com.surveytogether.domain.QuestionOptionDTO;
 import com.surveytogether.domain.SurveyDTO;
 import com.surveytogether.mapper.QuestionMapper;
 import com.surveytogether.mapper.QuestionOptionMapper;
+import com.surveytogether.mapper.SelectAnswerMapper;
+import com.surveytogether.mapper.StringAnswerMapper;
 import com.surveytogether.mapper.SurveyMapper;
 import com.surveytogether.paging.PaginationInfo;
 
@@ -23,6 +26,10 @@ public class SurveyServiceImpl implements SurveyService {
 	QuestionMapper questionMapper;
 	@Autowired
 	QuestionOptionMapper questionOptionMapper;
+	@Autowired
+	StringAnswerMapper stringAnswerMapper;
+	@Autowired
+	SelectAnswerMapper selectAnswerMapper;
 	
 	@Override
 	public boolean registerSurvey(SurveyDTO survey) {
@@ -132,6 +139,21 @@ public class SurveyServiceImpl implements SurveyService {
 	public List<QuestionOptionDTO> getOptionList(Long questionIdx) {
 		List<QuestionOptionDTO> optionList = questionOptionMapper.selectQuestionOptionList(questionIdx);
 		return optionList;
+	}
+
+	@Override
+	public boolean saveAnswer(AnswerDTO answer) {
+		int queryResult;
+		if(answer.getSelectAnswer().getSelaAnswer()!=null) {
+			// selectAnswer이 존재한다면 
+			queryResult = selectAnswerMapper.saveAnswer(answer.getSelectAnswer());
+		}else if(answer.getStringAnswer().getStraAnswer()!=null) {
+			// stringAnswer이 존재한다면
+			queryResult = stringAnswerMapper.saveAnswer(answer.getStringAnswer());
+		}else {
+			queryResult = 0;
+		}
+		return (queryResult==1)?true:false;
 	}
 
 

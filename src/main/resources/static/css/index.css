@@ -14,9 +14,9 @@
 	text-align: center;
 }
 .header-title{
-	color:#ffffff;
+	color:#1e7ba4;
 	font-weight:bold;
-	font-size: 2rem;
+	font-size: 3rem;
 	line-height: 60px;
 }
 
@@ -25,6 +25,10 @@
 	height:100%;
 	margin:0 auto;
 	text-align: center;
+}
+
+.container{
+	margin-top:8rem;	
 }
 
 .header-icon{

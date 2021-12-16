@@ -10,20 +10,26 @@
 <link rel="stylesheet" href="/css/index.css" />
 </head>
 <body>
+<!--  
 <div class="header-bar">
 	<p class="header-title">Survey Together</p>
 </div>
+-->
+
 <div class="wrapper">
-	<i class="fas fa-users header-icon"></i>
-	<div class="login-box">
-		<form action="/loginProcess" method="POST">
-			<p><input type="text" name="username" placeholder="id" class="input-bar"/></p>
-			<p><input type="password" name="password" placeholder="password" class="input-bar"/></p>
-			<label for="remember-me" class="remember-label">Remember</label>
-			<input type="checkbox" name="remember-me" id="remember-me" />
-			<p><button type="submit" class="btn">로그인</button>
-			<a href="/signup"><button type="button"  class="btn">회원가입</button></a></p>
-		</form>
+	<div class="container">
+		<i class="fas fa-users header-icon"></i>
+		<p class="header-title">Survey Together</p>
+		<div class="login-box">
+			<form action="/loginProcess" method="POST">
+				<p><input type="text" name="username" placeholder="id" class="input-bar" required/></p>
+				<p><input type="password" name="password" placeholder="password" class="input-bar" required/></p>
+				<label for="remember-me" class="remember-label">Remember</label>
+				<input type="checkbox" name="remember-me" id="remember-me" />
+				<p><button type="submit" class="btn">로그인</button>
+				<a href="/signup"><button type="button"  class="btn">회원가입</button></a></p>
+			</form>
+		</div>
 	</div>
 </div>
 </body>

@@ -1,54 +1,61 @@
 
 /* ------------------------ 저장영역 ------------------------ */
 function doneSurvey(){
-    // survey에 <- questionList담고 <- questionOptionList담고 , 최종적으로 survey 만을 넘겨주는 방식. 
+	
 	let answerUser = $(".userId").val();
-	
-	let questionList = [];
 	let fieldsetList = $('fieldset.question');
-	$.each(fieldsetList, function(index, fieldset){
-		let question = new Object();
-		question.quTitle = fieldset.querySelector("input[name='quTitle']").value;
-		question.quFormat = fieldset.querySelector("input[name='format']").value;
+	
+	$.each(fieldsetList, function(index,fieldset){
+		let format = fieldset.querySelector("input[name='format']").value;
+		let questionIdx = fieldset.querySelector("input[name='questionIdx']").value;
+		let answer;
+		let stringAnswer = new Object();
+		let selectAnswer = new Object();
+		
+		// format에 따라서 답변을 가져오는 방식이 달라진다. 
+		if(format == 'shortSentence' || format == 'longSentence'){
+			answer = fieldset.querySelector(".answer").value;
+			stringAnswer.straQuestionIdx = questionIdx;
+			stringAnswer.straWriter = answerUser;
+			stringAnswer.straAnswer = answer;
+			
+		}else if(format == 'multipleChoice' || format == 'checkBox'){
+			let checkedList = fieldset.querySelectorAll("input[class='option']:checked");
+			answer = [];
+			checkedList.forEach(function(checked){
+				answer.push(checked.value);
+			}); 
+			selectAnswer.selaQuestionIdx = questionIdx;
+			selectAnswer.selaWriter = answerUser;
+			selectAnswer.selaAnswer = answer;
 
-		if(question.quFormat!='shortSentence' && question.quFormat!='longSentence'){
-			// 객관식, 체크박스, 드롭다운이라면 옵션이 존재할것이다. 
-			let optionList = [];
-			let optionWrapper = fieldset.querySelectorAll("input.choose-question-option-desc");
-
-			for(let i=0; i<optionWrapper.length; i++){
-				let option = new Object();
-				option.opName = optionWrapper[i].value;
-				optionList.push(option);
-			}
-			question.questionOptionList = optionList;
+		}else if(format == 'dropDown'){
+			let selectBox =  fieldset.querySelector(".select-box");
+			answer = selectBox.options[selectBox.selectedIndex].value; 
+			selectAnswer.selaQuestionIdx = questionIdx;
+			selectAnswer.selaWriter = answerUser;
+			selectAnswer.selaAnswer = answer;
 		}
-		questionList.push(question);
+		
+		let answerDTO = {
+			selectAnswer: selectAnswer,
+			stringAnswer: stringAnswer
+		};
+		
+		$.ajax({
+			url:"/user/saveanswer",
+			method:"post",
+			data: JSON.stringify(answerDTO),
+			contentType: "application/json"
+		}).done(function(){
+			
+		});
+		
+		
 	});
-	
-	
-	let surveyIdx = $(".surveyIdx").val();
-	
-	let survey = {
-        suWriter : loginUser,
-        suTitle : $('.survey-title').val(),
-        suDesc : $('.survey-desc').val(),
-        questionList : questionList,
-		suIdx : surveyIdx
-    };
+	alert("설문조사에 참여완료 했습니다.");
+	location.href="/user/surveyboard";
 
-	$.ajax({
-		url: "/user/savesurvey",
-		method: "post",
-		data: JSON.stringify(survey),
-		contentType: "application/json"
-	}).done(function(){
-		alert("등록되었습니다.");
-		location.href = "/user/mysurvey";
-		/* ajax는 비동기식으로 동작하기때문에 url호출후 페이지 이동이 이루어지지 않는다.
-		   그러므로 location.href를 통해서 직접이동시켜줘야 한다.
-		*/
-	});
 }
 
  /* ------------------------ question 불러오기 ------------------------ */
@@ -91,5 +98,4 @@ function loadOption(){
 			});
 		}
 	});
-	
 }

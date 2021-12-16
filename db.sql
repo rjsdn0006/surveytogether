@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- 호스트:                          127.0.0.1
--- 서버 버전:                        10.6.3-MariaDB - mariadb.org binary distribution
+-- 서버 버전:                        10.6.4-MariaDB - mariadb.org binary distribution
 -- 서버 OS:                        Win64
 -- HeidiSQL 버전:                  11.3.0.6295
 -- --------------------------------------------------------
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `spring_session` (
 -- 테이블 데이터 surveytogether.spring_session:~1 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `spring_session` DISABLE KEYS */;
 INSERT INTO `spring_session` (`PRIMARY_ID`, `SESSION_ID`, `CREATION_TIME`, `LAST_ACCESS_TIME`, `MAX_INACTIVE_INTERVAL`, `EXPIRY_TIME`, `PRINCIPAL_NAME`) VALUES
-	('b3f8817c-ce4e-4932-889f-80f354b05d76', '36061328-f433-40a6-8c0d-9a72e8baf4f8', 1639613106181, 1639623646523, 7200, 1639630846523, 'user');
+	('74a314b5-6781-4267-a233-9e63e97e9a62', 'ce744cfc-422b-4614-81fd-d7dc80d74ec2', 1639643353615, 1639643378032, 7200, 1639650578032, NULL);
 /*!40000 ALTER TABLE `spring_session` ENABLE KEYS */;
 
 -- 테이블 surveytogether.spring_session_attributes 구조 내보내기
@@ -49,9 +49,25 @@ CREATE TABLE IF NOT EXISTS `spring_session_attributes` (
 
 -- 테이블 데이터 surveytogether.spring_session_attributes:~1 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `spring_session_attributes` DISABLE KEYS */;
-INSERT INTO `spring_session_attributes` (`SESSION_PRIMARY_ID`, `ATTRIBUTE_NAME`, `ATTRIBUTE_BYTES`) VALUES
-	('b3f8817c-ce4e-4932-889f-80f354b05d76', 'SPRING_SECURITY_CONTEXT', _binary 0xaced00057372003d6f72672e737072696e676672616d65776f726b2e73656375726974792e636f72652e636f6e746578742e5365637572697479436f6e74657874496d706c00000000000002300200014c000e61757468656e7469636174696f6e7400324c6f72672f737072696e676672616d65776f726b2f73656375726974792f636f72652f41757468656e7469636174696f6e3b78707372004f6f72672e737072696e676672616d65776f726b2e73656375726974792e61757468656e7469636174696f6e2e557365726e616d6550617373776f726441757468656e7469636174696f6e546f6b656e00000000000002300200024c000b63726564656e7469616c737400124c6a6176612f6c616e672f4f626a6563743b4c00097072696e636970616c71007e0004787200476f72672e737072696e676672616d65776f726b2e73656375726974792e61757468656e7469636174696f6e2e416273747261637441757468656e7469636174696f6e546f6b656ed3aa287e6e47640e0200035a000d61757468656e746963617465644c000b617574686f7269746965737400164c6a6176612f7574696c2f436f6c6c656374696f6e3b4c000764657461696c7371007e0004787001737200266a6176612e7574696c2e436f6c6c656374696f6e7324556e6d6f6469666961626c654c697374fc0f2531b5ec8e100200014c00046c6973747400104c6a6176612f7574696c2f4c6973743b7872002c6a6176612e7574696c2e436f6c6c656374696f6e7324556e6d6f6469666961626c65436f6c6c656374696f6e19420080cb5ef71e0200014c00016371007e00067870737200136a6176612e7574696c2e41727261794c6973747881d21d99c7619d03000149000473697a65787000000001770400000001737200426f72672e737072696e676672616d65776f726b2e73656375726974792e636f72652e617574686f726974792e53696d706c654772616e746564417574686f7269747900000000000002300200014c0004726f6c657400124c6a6176612f6c616e672f537472696e673b7870740009524f4c455f555345527871007e000d737200486f72672e737072696e676672616d65776f726b2e73656375726974792e7765622e61757468656e7469636174696f6e2e57656241757468656e7469636174696f6e44657461696c7300000000000002300200024c000d72656d6f74654164647265737371007e000f4c000973657373696f6e496471007e000f787074000f303a303a303a303a303a303a303a3174002466656364306537352d333162612d346438332d613439632d3939626538393336333531357073720021636f6d2e737572766579746f6765746865722e646f6d61696e2e5573657244544f000000000000000102000a5a001369734163636f756e744e6f6e457870697265645a001269734163636f756e744e6f6e4c6f636b65645a0017697343726564656e7469616c734e6f6e457870697265645a00096973456e61626c65644c00046175746871007e000f4c000b617574686f72697469657371007e00064c00046e616d6571007e000f4c000870617373776f726471007e000f4c000c72656769737465724461746571007e000f4c0008757365726e616d6571007e000f787001010101707371007e000c0000000177040000000171007e001078740009eab980eab1b4ec9ab074003c243261243130246637754b6d71767a56714674546d345335556e43362e76457a56395a326239456a6b75486b33664c6a34416a692f4a31575574676574000a323032312d31322d303974000475736572);
 /*!40000 ALTER TABLE `spring_session_attributes` ENABLE KEYS */;
+
+-- 테이블 surveytogether.tb_answer 구조 내보내기
+CREATE TABLE IF NOT EXISTS `tb_answer` (
+  `an_idx` int(10) NOT NULL AUTO_INCREMENT,
+  `an_writer` varchar(20) NOT NULL,
+  `an_question_idx` int(10) NOT NULL,
+  `an_string_answer` varchar(1000) DEFAULT NULL,
+  `an_select_answer` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`an_idx`),
+  KEY `tb_answer_ibfk_1` (`an_writer`),
+  KEY `tb_answer_ibfk_2` (`an_question_idx`),
+  CONSTRAINT `tb_answer_ibfk_1` FOREIGN KEY (`an_writer`) REFERENCES `tb_user` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `tb_answer_ibfk_2` FOREIGN KEY (`an_question_idx`) REFERENCES `tb_question` (`qu_idx`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+-- 테이블 데이터 surveytogether.tb_answer:~0 rows (대략적) 내보내기
+/*!40000 ALTER TABLE `tb_answer` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tb_answer` ENABLE KEYS */;
 
 -- 테이블 surveytogether.tb_auth 구조 내보내기
 CREATE TABLE IF NOT EXISTS `tb_auth` (
@@ -78,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `tb_question` (
   CONSTRAINT `FK_tb_question_tb_survey` FOREIGN KEY (`qu_survey_idx`) REFERENCES `tb_survey` (`su_idx`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb3;
 
--- 테이블 데이터 surveytogether.tb_question:~1 rows (대략적) 내보내기
+-- 테이블 데이터 surveytogether.tb_question:~6 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `tb_question` DISABLE KEYS */;
 INSERT INTO `tb_question` (`qu_idx`, `qu_survey_idx`, `qu_title`, `qu_format`) VALUES
 	(9, 18, '하고싶은말 적으시오', 'longSentence'),
@@ -99,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `tb_question_option` (
   CONSTRAINT `tb_question_option_ibfk_1` FOREIGN KEY (`op_question_idx`) REFERENCES `tb_question` (`qu_idx`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb3;
 
--- 테이블 데이터 surveytogether.tb_question_option:~0 rows (대략적) 내보내기
+-- 테이블 데이터 surveytogether.tb_question_option:~9 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `tb_question_option` DISABLE KEYS */;
 INSERT INTO `tb_question_option` (`op_idx`, `op_question_idx`, `op_name`) VALUES
 	(38, 22, '봄'),
@@ -112,6 +128,48 @@ INSERT INTO `tb_question_option` (`op_idx`, `op_question_idx`, `op_name`) VALUES
 	(45, 25, '1번'),
 	(46, 25, '2번');
 /*!40000 ALTER TABLE `tb_question_option` ENABLE KEYS */;
+
+-- 테이블 surveytogether.tb_select_answer 구조 내보내기
+CREATE TABLE IF NOT EXISTS `tb_select_answer` (
+  `sela_idx` int(10) NOT NULL AUTO_INCREMENT,
+  `sela_question_idx` int(10) NOT NULL,
+  `sela_writer` varchar(20) NOT NULL,
+  `sela_answer` varchar(1000) DEFAULT NULL,
+  PRIMARY KEY (`sela_idx`),
+  KEY `tb_select_answer_ibfk_1` (`sela_writer`),
+  KEY `tb_select_answer_ibfk_2` (`sela_question_idx`),
+  CONSTRAINT `tb_select_answer_ibfk_1` FOREIGN KEY (`sela_writer`) REFERENCES `tb_user` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `tb_select_answer_ibfk_2` FOREIGN KEY (`sela_question_idx`) REFERENCES `tb_question` (`qu_idx`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
+
+-- 테이블 데이터 surveytogether.tb_select_answer:~1 rows (대략적) 내보내기
+/*!40000 ALTER TABLE `tb_select_answer` DISABLE KEYS */;
+INSERT INTO `tb_select_answer` (`sela_idx`, `sela_question_idx`, `sela_writer`, `sela_answer`) VALUES
+	(2, 25, 'user', '2번'),
+	(3, 25, 'user', '1번'),
+	(4, 22, 'user', '여름'),
+	(5, 23, 'user', '이게되나');
+/*!40000 ALTER TABLE `tb_select_answer` ENABLE KEYS */;
+
+-- 테이블 surveytogether.tb_string_answer 구조 내보내기
+CREATE TABLE IF NOT EXISTS `tb_string_answer` (
+  `stra_idx` int(10) NOT NULL AUTO_INCREMENT,
+  `stra_question_idx` int(10) NOT NULL,
+  `stra_writer` varchar(20) NOT NULL,
+  `stra_answer` varchar(1000) DEFAULT NULL,
+  PRIMARY KEY (`stra_idx`),
+  KEY `tb_stirng_answer_ibfk_1` (`stra_writer`),
+  KEY `tb_stirng_answer_ibfk_2` (`stra_question_idx`),
+  CONSTRAINT `tb_string_answer_ibfk_1` FOREIGN KEY (`stra_writer`) REFERENCES `tb_user` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `tb_string_answer_ibfk_2` FOREIGN KEY (`stra_question_idx`) REFERENCES `tb_question` (`qu_idx`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+
+-- 테이블 데이터 surveytogether.tb_string_answer:~0 rows (대략적) 내보내기
+/*!40000 ALTER TABLE `tb_string_answer` DISABLE KEYS */;
+INSERT INTO `tb_string_answer` (`stra_idx`, `stra_question_idx`, `stra_writer`, `stra_answer`) VALUES
+	(1, 24, 'user', '123'),
+	(2, 24, 'user', '456');
+/*!40000 ALTER TABLE `tb_string_answer` ENABLE KEYS */;
 
 -- 테이블 surveytogether.tb_survey 구조 내보내기
 CREATE TABLE IF NOT EXISTS `tb_survey` (
@@ -126,7 +184,7 @@ CREATE TABLE IF NOT EXISTS `tb_survey` (
   CONSTRAINT `FK_tb_survey_tb_user` FOREIGN KEY (`su_writer`) REFERENCES `tb_user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb3;
 
--- 테이블 데이터 surveytogether.tb_survey:~2 rows (대략적) 내보내기
+-- 테이블 데이터 surveytogether.tb_survey:~7 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `tb_survey` DISABLE KEYS */;
 INSERT INTO `tb_survey` (`su_idx`, `su_writer`, `su_title`, `su_desc`, `su_create_time`, `su_update_time`) VALUES
 	(18, 'user', '하고싶은말 ', '하고싶은말을 적으시오', '2021-12-14 11:16:11', NULL),

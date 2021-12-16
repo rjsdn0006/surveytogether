@@ -9,18 +9,20 @@
 			<c:choose>
 				<c:when test="${que.quFormat eq 'shortSentence'}">
 					<fieldset class="question">
+						<p><input type="hidden" name="questionIdx" value="${que.quIdx}" /></p>
 						<p><input type="text" name="quTitle" class="input-bar add-question" value="${que.quTitle}" disabled/></p>
 						<p><input type="hidden" name="format" value="shortSentence" /></p>
-						<p><input type="text" placeholder="단답형 답변을 적어주세요" class="input-bar" /></p>
+						<p><input type="text" placeholder="단답형 답변을 적어주세요" class="input-bar answer" /></p>
 					</fieldset>
 				</c:when>
 			</c:choose>
 			<c:choose>
 				<c:when test="${que.quFormat eq 'longSentence'}">
 					<fieldset class="question">
+						<p><input type="hidden" name="questionIdx" value="${que.quIdx}" /></p>
 						<p><input type="text" name="quTitle" class="input-bar add-question" value="${que.quTitle}" disabled/></p>
 						<p><input type="hidden" name="format" value="longSentence" /></p>
-						<p><textarea class="input-bar long-answer">장문형 답변을 적어주세요</textarea></p>
+						<p><textarea class="input-bar long-answer answer">장문형 답변을 적어주세요</textarea></p>
 					</fieldset>
 				</c:when>
 			</c:choose>
@@ -31,11 +33,7 @@
 						<p><input type="text" name="quTitle" class="input-bar add-question"  value="${que.quTitle}" disabled/></p>
 						<p><input type="hidden" name="format" value="multipleChoice" /></p>
 						<div class="choose-question-container">
-							<p class="choose-question-box">
-								<span class="firstOptionSpace">&nbsp;&nbsp;&nbsp;&nbsp;</span>
-								<input type="radio" name="option" disabled/>
-								<input type="text" placeholder="추가된 옵션" class="choose-question-option-desc" required/>
-							</p>
+						
 						</div>
 					</fieldset>
 				</c:when>
@@ -47,11 +45,7 @@
 						<p><input type="text" name="quTitle" class="input-bar add-question" value="${que.quTitle}" disabled/></p>
 						<p><input type="hidden" name="format" value="checkBox" /></p>
 						<div class="choose-question-container">
-							<p class="choose-question-box">
-								<span class="firstOptionSpace">&nbsp;&nbsp;&nbsp;&nbsp;</span>
-								<input type="checkbox" name="option" disabled/>
-								<input type="text" placeholder="추가된 옵션" class="choose-question-option-desc" required/>
-							</p>
+	
 						</div>
 					</fieldset>
 				</c:when>
@@ -63,10 +57,7 @@
 						<p><input type="text" name="quTitle" class="input-bar add-question" value="${que.quTitle}" disabled/></p>
 						<p><input type="hidden" name="format" value="dropDown" /></p>
 						<div class="choose-question-container">
-							<p class="choose-question-box">
-								<span class="firstOptionSpace">&nbsp;&nbsp;&nbsp;&nbsp;</span>
-								<input type="text" placeholder="추가된 옵션" class="choose-question-option-desc" required/>
-							</p>
+
 						</div>
 					</fieldset>
 				</c:when>
