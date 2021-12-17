@@ -22,4 +22,17 @@
 					)
 	</insert>
 	
+	<select id="selectAnswerPeople" parameterType="Long" resultType="String">
+		SELECT 	DISTINCT(sela_writer)
+		FROM 	tb_select_answer
+		WHERE 	sela_question_idx = #{questionIdx}
+	</select>
+	
+	<select id="selectAnswer" resultType="String">
+		SELECT 	sela_answer
+		FROM 	tb_select_answer
+		WHERE 	sela_question_idx = #{questionIdx}
+		AND 	sela_writer = #{writer}
+	</select>
+	
 </mapper>

@@ -20,4 +20,17 @@
 					)
 	</insert>
 	
+	<select id="selectAnswerPeople" parameterType="Long" resultType="String">
+		SELECT 	DISTINCT(stra_writer)
+		FROM 	tb_string_answer
+		WHERE 	stra_question_idx = #{questionIdx}
+	</select>
+	
+	<select id="selectAnswer" resultType="String">
+		SELECT 	stra_answer
+		FROM 	tb_string_answer
+		WHERE 	stra_question_idx = #{questionIdx}
+		AND 	stra_writer = #{writer}
+	</select>
+	
 </mapper>

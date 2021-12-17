@@ -16,4 +16,6 @@ public interface SurveyService {
 	public List<QuestionDTO> getQuestionList(Long surveyIdx);
 	public List<QuestionOptionDTO> getOptionList(Long questionIdx);
 	public boolean saveAnswer(AnswerDTO answer);
+	public List<String> getAnswerPeople(Long questionIdx);
+	public List<String> getAnswer(String writer, Long questionIdx);
 }

@@ -1,10 +1,14 @@
 package com.surveytogether.service;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import com.surveytogether.domain.AnswerDTO;
 import com.surveytogether.domain.QuestionDTO;
@@ -154,6 +158,44 @@ public class SurveyServiceImpl implements SurveyService {
 			queryResult = 0;
 		}
 		return (queryResult==1)?true:false;
+	}
+
+	@Override
+	public List<String> getAnswerPeople(Long questionIdx) {
+		/* 
+		 * tb_string_answer 과 tb_select_answer 테이블에 questionIdx를 전달하여 DISTINCT(writer)를 받아온다. <- List<String> 
+		 * 받아온 List<String> 을 순회하며 set<String>에 넣어주어 중복을 제거하고 마지막으로 다시 List로 변환하고 반환해준다.
+		 */
+		List<String> listA = stringAnswerMapper.selectAnswerPeople(questionIdx);
+		List<String> listB = selectAnswerMapper.selectAnswerPeople(questionIdx);
+
+		Set<String> set = new HashSet<>();
+		
+		if(!listA.isEmpty()) {
+			for(String s : listA) {
+				set.add(s);
+			}
+		}
+		if(!listB.isEmpty()) {
+			for(String s : listB) {
+				set.add(s);
+			}
+		}
+
+		List<String> list = new ArrayList<>();
+		list.addAll(set);
+		return list;
+	}
+
+	@Override
+	public List<String> getAnswer(String writer, Long questionIdx) {
+		List<String> listA = stringAnswerMapper.selectAnswer(writer,questionIdx);
+		List<String> listB = selectAnswerMapper.selectAnswer(writer,questionIdx);
+		List<String> list = new ArrayList<String>();
+		list.addAll(listA);
+		list.addAll(listB);
+		
+		return list;
 	}
 
 

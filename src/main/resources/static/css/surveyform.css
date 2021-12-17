@@ -232,6 +232,56 @@ textarea{
 	cursor: pointer;
 }
 
+/* ----------------------- 응답사항 디자인 ----------------------- */ 
+.no-answer-box{
+	margin-top: 13rem;
+	color : #c0c0c0;
+}
+.no-icon{
+	font-size: 15rem;
+}
+.no-desc{
+	font-size: 3rem;
+}
+.person-icon{
+	margin-top: 3rem;
+	font-size: 8rem;
+}
+.answer-list-title{
+	font-size: 2rem;
+	font-weight: bold;
+	color: #3e3e3e;
+}
+.answer-people-box{
+	margin-top: 1rem;
+}
+.answer-people-box p {
+	width: 30%;
+	margin: 0 auto;
+	padding: 1rem;
+	border-bottom: 1px dashed #c4c4c4;
+	font-size : 1.3rem;
+	cursor: pointer;
+}
+.surveyWriter{
+	width: 50%;
+	margin: 0 auto;
+	text-align: right;
+	color: #c0c0c0;
+}
+input:disabled {
+	background-color: #ffffff;
+}
+textarea:disabled {
+	background-color: #ffffff;
+}
+.answer-add-box{
+	width: 50%;
+	margin: 0 auto;
+	text-align: left; 
+	padding: 0.5rem;
+}
+/* ----------------------- 기타 디자인 ----------------------- */ 
 @media only screen and (min-width:1200px) {
 	.wrapper{
 		max-width: 1200px;

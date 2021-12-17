@@ -8,10 +8,9 @@
 - surveyboard.jsp에서 항목선택시 링크 
 (현재 idx만 전달해주고 있음, 나중에 makeQueryString으로 페이징정보 전달해야함)
 - survey 수정이나 새글쓸때 뒤로가기하면 makerQueryString 전달하기 
-- detail에서 저장하기 만들기
 
 
-▶ 답변등록하는과정
+// 답변등록하는과정 --------------------------------------------------------------------------
 
 let stringAnswer = new Object();
 let selectAnswer = new Object();

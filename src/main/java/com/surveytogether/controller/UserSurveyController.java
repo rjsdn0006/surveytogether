@@ -2,6 +2,7 @@ package com.surveytogether.controller;
 
 
 import java.security.Principal;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.surveytogether.domain.AnswerDTO;
 import com.surveytogether.domain.QuestionDTO;
@@ -101,8 +103,41 @@ public class UserSurveyController extends UiUtils {
 		return "/user/option";
 	}
 	
-	// surveyboard 영역 --------------------------------------------------------------
+	// mysurvey - answer 영역 --------------------------------------------------------
+	@GetMapping("/answerlist")
+	public String gotoAnswerList(@RequestParam("suIdx")Long suIdx, Model model) {
+		List<QuestionDTO> questionList = surveyService.getQuestionList(suIdx);
+		
+		if(!questionList.isEmpty()) {
+			List<String> answerPeople = surveyService.getAnswerPeople(questionList.get(0).getQuIdx());
+			model.addAttribute("answerPeople",answerPeople);
+			model.addAttribute("suIdx",suIdx);
+		}
+		
+		return "/user/answerlist";
+	}
 	
+	@GetMapping("/answer")
+	public String gotoAnswer(@RequestParam("suIdx")Long suIdx, @RequestParam("writer") String writer,Model model) {
+		SurveyDTO survey = surveyService.getSurveyDetail(suIdx);
+		List<QuestionDTO> questionList = surveyService.getQuestionList(suIdx);
+		
+		model.addAttribute("questionList",questionList);
+		model.addAttribute("survey",survey);
+		model.addAttribute("writer",writer);
+		
+		return "/user/answer";
+	}
+	
+	@GetMapping("/getanswer")
+	@ResponseBody
+	public List<String> getAnswer(String writer,Long quIdx) {
+		List<String> answer = surveyService.getAnswer(writer, quIdx);
+		return answer;
+	}
+	
+	
+	// surveyboard 영역 --------------------------------------------------------------
 	@GetMapping("/surveyboard")
 	public String gotoSurveyBoard(SurveyDTO survey,Model model) {
 		List<SurveyDTO> surveyList = surveyService.getSurveyList(survey);
@@ -122,4 +157,27 @@ public class UserSurveyController extends UiUtils {
 		surveyService.saveAnswer(answer);
 		return "/user/surveyboard";
 	}
+	
+	@GetMapping("/checkanswer") // 이미참여한 설문조사는 참여할수 없음
+	@ResponseBody
+	public boolean checkAlreadyAnswer(Long suIdx,String writer, Model model) {
+		boolean result = false;
+		
+		List<QuestionDTO> questionList = surveyService.getQuestionList(suIdx);
+		List<String> answerPeople = Collections.emptyList();
+		
+		if(!questionList.isEmpty()) {
+			answerPeople = surveyService.getAnswerPeople(questionList.get(0).getQuIdx());
+		}
+		if(!answerPeople.isEmpty()) {
+			for(String person: answerPeople) {
+				if(person.equals(writer)) {
+					result = true;
+				}
+			}
+		}
+		
+		return result;
+	}
+	
 }
