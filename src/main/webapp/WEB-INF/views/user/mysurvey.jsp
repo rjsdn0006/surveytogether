@@ -28,12 +28,12 @@
 				<th>CREATE TIME</th>
 				<th>UPDATE TIME</th>
 			</tr>
-			<c:forEach items="${surveyList}" var="survey" varStatus="status">
+			<c:forEach items="${surveyList}" var="item" varStatus="status">
 				<tr>
-					<td class="number">${survey.suIdx}</td>
-					<td class="title"><a href="/user/surveyedit${survey.makeQueryString(survey.currentPageNo)}&suIdx=${survey.suIdx}">${survey.suTitle}</a></td>
-					<td class="cTime">${survey.suCreateTime}</td>
-					<td class="uTime">${survey.suUpdateTime}</td>
+					<td class="number">${item.suIdx}</td>
+					<td class="title"><a href="/user/surveyedit${survey.makeQueryString(survey.currentPageNo)}&suIdx=${item.suIdx}">${item.suTitle}</a></td>
+					<td class="cTime">${item.suCreateTime}</td>
+					<td class="uTime">${item.suUpdateTime}</td>
 				</tr>
 			</c:forEach>
 			
@@ -77,7 +77,7 @@
 		<input type="hidden" name="pageSize" value="${survey.pageSize}" />
 		<select name="searchType" class="searchType">
 			<option value="title">제목</option>
-			<!-- <option value="wrtier">작성자</option> -->
+			<!-- <option value="writer">작성자</option> -->
 		</select>
 		<input type="text" name="searchKeyword" placeholder="내용" class="searchKeyword" />
 		<input type="submit" value="검색하기" class="searchBtn"/>

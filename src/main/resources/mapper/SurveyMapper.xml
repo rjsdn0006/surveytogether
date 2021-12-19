@@ -63,14 +63,16 @@
 	<select id="selectSurveyList" parameterType="SurveyDTO" resultType="SurveyDTO">
 		SELECT 	<include refid="surveyCol" />
 		FROM 	tb_survey
-		<include refid="CommonMapper.paging" />
+		WHERE 	1=1
 		<include refid="CommonMapper.search" />
+		<include refid="CommonMapper.paging" />
 		<!-- 리스트이므로 페이징과 검색정보가 들어가야한다. -->
 	</select>
 	
 	<select id="selectSurveyTotalCount" parameterType="SurveyDTO" resultType="int">
 		SELECT 	COUNT(*)
 		FROM 	tb_survey
+		WHERE 	1=1
 		<include refid="CommonMapper.search" />
 		<!-- 검색정보가 들어가야한다.  -->
 	</select>

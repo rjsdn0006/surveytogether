@@ -25,7 +25,7 @@
 			<span class="header-title">Editor</span>
 		</div>
 		<div class="right-box">
-			<a href="/user/mysurvey"><span class="menu1">뒤로가기</span></a>
+			<a href="/user/mysurvey${params.makeQueryString(params.currentPageNo)}"><span class="menu1">뒤로가기</span></a>
 			<a href="/user/answerlist?suIdx=${survey.suIdx}"><span class="menu2">응답사항</span></a>
 			<a href="#" onclick="saveSurvey();"><span class="menu3">저장하기</span></a>
 		</div>

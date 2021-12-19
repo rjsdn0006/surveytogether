@@ -57,9 +57,9 @@ public class UserSurveyController extends UiUtils {
 	}
 	
 	@GetMapping("surveyedit")
-	public String gotoSurveyEditForm(@RequestParam("suIdx") Long suIdx,Model model) {
+	public String gotoSurveyEditForm(@ModelAttribute("params") SurveyDTO params,Model model) {
 		// surveyform에 함께 구현도 가능하지만 페이징까지 들어가면 코드가 너무 지저분해져서 따로구현
-		SurveyDTO survey = surveyService.getSurveyDetail(suIdx);
+		SurveyDTO survey = surveyService.getSurveyDetail(params.getSuIdx());
 		model.addAttribute("survey",survey);
 		return "/user/surveyedit";
 	}
@@ -142,12 +142,13 @@ public class UserSurveyController extends UiUtils {
 	public String gotoSurveyBoard(SurveyDTO survey,Model model) {
 		List<SurveyDTO> surveyList = surveyService.getSurveyList(survey);
 		model.addAttribute("surveyList",surveyList);
+		model.addAttribute("survey",survey);
 		return "/user/surveyboard";
 	}
 	
 	@GetMapping("/surveydo")
-	public String gotoSurveyDo(@RequestParam("suIdx") Long suIdx,Model model) {
-		SurveyDTO survey = surveyService.getSurveyDetail(suIdx);
+	public String gotoSurveyDo(@ModelAttribute("params") SurveyDTO params,Model model) {
+		SurveyDTO survey = surveyService.getSurveyDetail(params.getSuIdx());
 		model.addAttribute("survey",survey);
 		return "/user/surveydo";
 	}

@@ -24,7 +24,7 @@
 			<span class="header-title">Participation</span>
 		</div>
 		<div class="right-box">
-			<a href="/user/surveyboard"><span class="menu1">뒤로가기</span></a>
+			<a href="/user/surveyboard${params.makeQueryString(params.currentPageNo)}"><span class="menu1">뒤로가기</span></a>
 			<a href="#" onclick="doneSurvey();"><span class="menu2">참여완료</span></a>
 		</div>
 	</div>
