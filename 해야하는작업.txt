@@ -48,3 +48,7 @@ sela_writer
 sela_answer
 sela_question_idx 
 
+
+
+
+* survey.do에서 저장할때 resultDTO에 값을 저장 시켜주어야 한다. 

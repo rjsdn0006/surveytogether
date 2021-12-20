@@ -26,8 +26,9 @@
 		</div>
 		<div class="right-box">
 			<a href="/user/mysurvey${params.makeQueryString(params.currentPageNo)}"><span class="menu1">뒤로가기</span></a>
-			<a href="/user/answerlist?suIdx=${survey.suIdx}"><span class="menu2">응답사항</span></a>
-			<a href="#" onclick="saveSurvey();"><span class="menu3">저장하기</span></a>
+			<a href="#" onclick="deleteSurvey();"><span class="menu2">삭제하기</span></a>
+			<a href="/user/answerlist?suIdx=${survey.suIdx}"><span class="menu3">응답사항</span></a>
+			<a href="#" onclick="saveSurvey();"><span class="menu4">저장하기</span></a>
 		</div>
 	</div>
 </div>

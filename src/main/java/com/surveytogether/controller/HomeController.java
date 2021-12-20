@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.surveytogether.domain.UserDTO;
+import com.surveytogether.service.SurveyService;
 import com.surveytogether.service.UserService;
 import com.surveytogether.util.Method;
 import com.surveytogether.util.UiUtils;
@@ -20,6 +21,8 @@ public class HomeController extends UiUtils {
 	UserService userService;
 	@Autowired
 	PasswordEncoder passwordEncoder;
+	@Autowired
+	SurveyService surveyService;
 	
 	@GetMapping("/")
 	public String gotoLoginPage() {

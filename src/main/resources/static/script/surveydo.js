@@ -31,7 +31,8 @@ function doneSurvey(){
 
 		}else if(format == 'dropDown'){
 			let selectBox =  fieldset.querySelector(".select-box");
-			answer = selectBox.options[selectBox.selectedIndex].value; 
+			answer = [];
+			answer.push(selectBox.options[selectBox.selectedIndex].value); 
 			selectAnswer.selaQuestionIdx = questionIdx;
 			selectAnswer.selaWriter = answerUser;
 			selectAnswer.selaAnswer = answer;

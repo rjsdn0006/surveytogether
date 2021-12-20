@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -103,6 +104,12 @@ public class UserSurveyController extends UiUtils {
 		return "/user/option";
 	}
 	
+	@PostMapping("/deletesurvey")
+	public String deleteSurvey(Long suIdx) {
+		surveyService.deleteSurvey(suIdx);
+		return "/user/mysurvey";
+	}
+	
 	// mysurvey - answer 영역 --------------------------------------------------------
 	@GetMapping("/answerlist")
 	public String gotoAnswerList(@RequestParam("suIdx")Long suIdx, Model model) {
@@ -134,6 +141,12 @@ public class UserSurveyController extends UiUtils {
 	public List<String> getAnswer(String writer,Long quIdx) {
 		List<String> answer = surveyService.getAnswer(writer, quIdx);
 		return answer;
+	}
+	
+	@GetMapping("/statistics")
+	public String gotoStatistics() {
+		
+		return "/user/statistics";
 	}
 	
 	

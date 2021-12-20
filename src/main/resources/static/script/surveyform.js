@@ -212,6 +212,19 @@ function saveSurvey(){
 	});
 }
 
+/* ------------------------ 삭제영역 ------------------------ */
+function deleteSurvey(){
+	if(confirm("정말 삭제하시겠습니까?")){
+		const surveyIdx = $(".surveyIdx").val();
+		$.ajax({
+			url: "/user/deletesurvey",
+			method: "post",
+			data: {suIdx:surveyIdx}
+		}).done(function(){
+			location.href = "/user/mysurvey";
+		});
+	}
+}
  /* ------------------------ 수정일 경우 question 불러오기 ------------------------ */
 $(function(){
 	if($(".surveyIdx")!=null){

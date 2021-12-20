@@ -16,10 +16,9 @@
 			<a href="/home"><span class="header-title">Survey Together</span></a>
 		</div>
 		<div class="right-box">
-			<a href="#"><span class="menu1">자유게시판</span></a>
-			<a href="/user/surveyboard"><span class="menu2">설문조사참여</span></a>
-			<a href="/user/mysurvey"><span class="menu3">나의설문조사</span></a>
-			<a href="/logout"><span class="menu4">로그아웃</span></a>
+			<a href="/user/surveyboard"><span class="menu1">설문조사참여</span></a>
+			<a href="/user/mysurvey"><span class="menu2">나의설문조사</span></a>
+			<a href="/logout"><span class="menu3">로그아웃</span></a>
 		</div>
 	</div>
 </div>

@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- 호스트:                          127.0.0.1
--- 서버 버전:                        10.6.4-MariaDB - mariadb.org binary distribution
+-- 서버 버전:                        10.6.3-MariaDB - mariadb.org binary distribution
 -- 서버 OS:                        Win64
 -- HeidiSQL 버전:                  11.3.0.6295
 -- --------------------------------------------------------
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `spring_session` (
 -- 테이블 데이터 surveytogether.spring_session:~1 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `spring_session` DISABLE KEYS */;
 INSERT INTO `spring_session` (`PRIMARY_ID`, `SESSION_ID`, `CREATION_TIME`, `LAST_ACCESS_TIME`, `MAX_INACTIVE_INTERVAL`, `EXPIRY_TIME`, `PRINCIPAL_NAME`) VALUES
-	('74a314b5-6781-4267-a233-9e63e97e9a62', 'ce744cfc-422b-4614-81fd-d7dc80d74ec2', 1639643353615, 1639643378032, 7200, 1639650578032, NULL);
+	('6ff34c60-8a7b-4d9b-bda0-03d70bd9fa7c', '9634cbb3-356a-40c3-bc28-a97c2915cb6b', 1639966710153, 1639966710174, 7200, 1639973910174, NULL);
 /*!40000 ALTER TABLE `spring_session` ENABLE KEYS */;
 
 -- 테이블 surveytogether.spring_session_attributes 구조 내보내기
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `spring_session_attributes` (
   CONSTRAINT `SPRING_SESSION_ATTRIBUTES_FK` FOREIGN KEY (`SESSION_PRIMARY_ID`) REFERENCES `spring_session` (`PRIMARY_ID`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
 
--- 테이블 데이터 surveytogether.spring_session_attributes:~1 rows (대략적) 내보내기
+-- 테이블 데이터 surveytogether.spring_session_attributes:~0 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `spring_session_attributes` DISABLE KEYS */;
 /*!40000 ALTER TABLE `spring_session_attributes` ENABLE KEYS */;
 
@@ -77,10 +77,11 @@ CREATE TABLE IF NOT EXISTS `tb_auth` (
   CONSTRAINT `tb_auth_ibfk_1` FOREIGN KEY (`id`) REFERENCES `tb_user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
--- 테이블 데이터 surveytogether.tb_auth:~0 rows (대략적) 내보내기
+-- 테이블 데이터 surveytogether.tb_auth:~1 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `tb_auth` DISABLE KEYS */;
 INSERT INTO `tb_auth` (`id`, `auth`) VALUES
-	('user', 'ROLE_USER');
+	('user', 'ROLE_USER'),
+	('user2', 'ROLE_USER');
 /*!40000 ALTER TABLE `tb_auth` ENABLE KEYS */;
 
 -- 테이블 surveytogether.tb_question 구조 내보내기
@@ -92,17 +93,15 @@ CREATE TABLE IF NOT EXISTS `tb_question` (
   PRIMARY KEY (`qu_idx`) USING BTREE,
   KEY `FK_tb_question_tb_survey` (`qu_survey_idx`) USING BTREE,
   CONSTRAINT `FK_tb_question_tb_survey` FOREIGN KEY (`qu_survey_idx`) REFERENCES `tb_survey` (`su_idx`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb3;
 
--- 테이블 데이터 surveytogether.tb_question:~6 rows (대략적) 내보내기
+-- 테이블 데이터 surveytogether.tb_question:~4 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `tb_question` DISABLE KEYS */;
 INSERT INTO `tb_question` (`qu_idx`, `qu_survey_idx`, `qu_title`, `qu_format`) VALUES
-	(9, 18, '하고싶은말 적으시오', 'longSentence'),
-	(15, 48, '무슨 질문을할까', 'shortSentence'),
-	(22, 49, '좋아하는 계절은?', 'multipleChoice'),
-	(23, 49, '체크박스테스트', 'checkBox'),
-	(24, 49, '단답형 질문테스트', 'shortSentence'),
-	(25, 49, '드롭다운 질문테스트', 'dropDown');
+	(33, 51, '좋아하는 영화장르는?', 'checkBox'),
+	(34, 51, '왜 그 장르를 좋아합니까? ', 'shortSentence'),
+	(35, 50, '가장 좋아하는 계절은?', 'multipleChoice'),
+	(36, 50, '이유는 무엇입니까?', 'shortSentence');
 /*!40000 ALTER TABLE `tb_question` ENABLE KEYS */;
 
 -- 테이블 surveytogether.tb_question_option 구조 내보내기
@@ -113,21 +112,36 @@ CREATE TABLE IF NOT EXISTS `tb_question_option` (
   PRIMARY KEY (`op_idx`) USING BTREE,
   KEY `question_idx` (`op_question_idx`) USING BTREE,
   CONSTRAINT `tb_question_option_ibfk_1` FOREIGN KEY (`op_question_idx`) REFERENCES `tb_question` (`qu_idx`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb3;
 
--- 테이블 데이터 surveytogether.tb_question_option:~9 rows (대략적) 내보내기
+-- 테이블 데이터 surveytogether.tb_question_option:~8 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `tb_question_option` DISABLE KEYS */;
 INSERT INTO `tb_question_option` (`op_idx`, `op_question_idx`, `op_name`) VALUES
-	(38, 22, '봄'),
-	(39, 22, '여름'),
-	(40, 22, '가을'),
-	(41, 22, '겨울'),
-	(42, 23, '이게되나'),
-	(43, 23, '되네'),
-	(44, 23, '왜지'),
-	(45, 25, '1번'),
-	(46, 25, '2번');
+	(63, 33, '호러'),
+	(64, 33, '로맨스'),
+	(65, 33, '코미디'),
+	(66, 33, '판타지'),
+	(67, 35, '봄'),
+	(68, 35, '여름'),
+	(69, 35, '가을'),
+	(70, 35, '겨울');
 /*!40000 ALTER TABLE `tb_question_option` ENABLE KEYS */;
+
+-- 테이블 surveytogether.tb_result 구조 내보내기
+CREATE TABLE IF NOT EXISTS `tb_result` (
+  `re_su_idx` int(10) NOT NULL,
+  `re_qu_idx` int(10) NOT NULL,
+  `re_idx` int(10) NOT NULL,
+  `re_answer` varchar(1000) NOT NULL,
+  PRIMARY KEY (`re_su_idx`,`re_qu_idx`,`re_idx`),
+  KEY `FK_tb_result_tb_question` (`re_qu_idx`),
+  CONSTRAINT `FK_tb_result_tb_question` FOREIGN KEY (`re_qu_idx`) REFERENCES `tb_question` (`qu_idx`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_tb_result_tb_survey` FOREIGN KEY (`re_su_idx`) REFERENCES `tb_survey` (`su_idx`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+-- 테이블 데이터 surveytogether.tb_result:~0 rows (대략적) 내보내기
+/*!40000 ALTER TABLE `tb_result` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tb_result` ENABLE KEYS */;
 
 -- 테이블 surveytogether.tb_select_answer 구조 내보내기
 CREATE TABLE IF NOT EXISTS `tb_select_answer` (
@@ -140,15 +154,12 @@ CREATE TABLE IF NOT EXISTS `tb_select_answer` (
   KEY `tb_select_answer_ibfk_2` (`sela_question_idx`),
   CONSTRAINT `tb_select_answer_ibfk_1` FOREIGN KEY (`sela_writer`) REFERENCES `tb_user` (`id`) ON DELETE CASCADE,
   CONSTRAINT `tb_select_answer_ibfk_2` FOREIGN KEY (`sela_question_idx`) REFERENCES `tb_question` (`qu_idx`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb3;
 
 -- 테이블 데이터 surveytogether.tb_select_answer:~1 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `tb_select_answer` DISABLE KEYS */;
 INSERT INTO `tb_select_answer` (`sela_idx`, `sela_question_idx`, `sela_writer`, `sela_answer`) VALUES
-	(2, 25, 'user', '2번'),
-	(3, 25, 'user', '1번'),
-	(4, 22, 'user', '여름'),
-	(5, 23, 'user', '이게되나');
+	(26, 35, 'user2', '여름');
 /*!40000 ALTER TABLE `tb_select_answer` ENABLE KEYS */;
 
 -- 테이블 surveytogether.tb_string_answer 구조 내보내기
@@ -162,13 +173,12 @@ CREATE TABLE IF NOT EXISTS `tb_string_answer` (
   KEY `tb_stirng_answer_ibfk_2` (`stra_question_idx`),
   CONSTRAINT `tb_string_answer_ibfk_1` FOREIGN KEY (`stra_writer`) REFERENCES `tb_user` (`id`) ON DELETE CASCADE,
   CONSTRAINT `tb_string_answer_ibfk_2` FOREIGN KEY (`stra_question_idx`) REFERENCES `tb_question` (`qu_idx`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb3;
 
--- 테이블 데이터 surveytogether.tb_string_answer:~0 rows (대략적) 내보내기
+-- 테이블 데이터 surveytogether.tb_string_answer:~1 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `tb_string_answer` DISABLE KEYS */;
 INSERT INTO `tb_string_answer` (`stra_idx`, `stra_question_idx`, `stra_writer`, `stra_answer`) VALUES
-	(1, 24, 'user', '123'),
-	(2, 24, 'user', '456');
+	(9, 36, 'user2', '여름이라서');
 /*!40000 ALTER TABLE `tb_string_answer` ENABLE KEYS */;
 
 -- 테이블 surveytogether.tb_survey 구조 내보내기
@@ -182,18 +192,13 @@ CREATE TABLE IF NOT EXISTS `tb_survey` (
   PRIMARY KEY (`su_idx`) USING BTREE,
   KEY `FK_tb_survey_tb_user` (`su_writer`) USING BTREE,
   CONSTRAINT `FK_tb_survey_tb_user` FOREIGN KEY (`su_writer`) REFERENCES `tb_user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb3;
 
--- 테이블 데이터 surveytogether.tb_survey:~7 rows (대략적) 내보내기
+-- 테이블 데이터 surveytogether.tb_survey:~2 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `tb_survey` DISABLE KEYS */;
 INSERT INTO `tb_survey` (`su_idx`, `su_writer`, `su_title`, `su_desc`, `su_create_time`, `su_update_time`) VALUES
-	(18, 'user', '하고싶은말 ', '하고싶은말을 적으시오', '2021-12-14 11:16:11', NULL),
-	(22, 'user', '하고싶은말 ', NULL, '2021-12-16 09:08:58', NULL),
-	(23, 'user', '하고싶은말 ', NULL, '2021-12-16 09:08:59', NULL),
-	(24, 'user', '하고싶은말 ', NULL, '2021-12-16 09:08:59', NULL),
-	(26, 'user', '하고싶은말 ', NULL, '2021-12-16 09:08:59', NULL),
-	(48, 'user', '해야했던말', '생각이안나', '2021-12-16 10:08:03', NULL),
-	(49, 'user', '객관식 테스트', '객관식 테스트중 ', '2021-12-16 10:25:23', '2021-12-16 11:04:46');
+	(50, 'user', '계절에 관한 설문조사', '좋아하는 계절과 싫어하는 계절을 말해주세요 ', '2021-12-20 09:59:40', '2021-12-20 11:17:38'),
+	(51, 'user', '영화에 관한 설문조사', '영화를 좋아하는 사람들을 위한 설문조사 ', '2021-12-20 10:01:30', NULL);
 /*!40000 ALTER TABLE `tb_survey` ENABLE KEYS */;
 
 -- 테이블 surveytogether.tb_user 구조 내보내기
@@ -209,10 +214,11 @@ CREATE TABLE IF NOT EXISTS `tb_user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
--- 테이블 데이터 surveytogether.tb_user:~0 rows (대략적) 내보내기
+-- 테이블 데이터 surveytogether.tb_user:~1 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `tb_user` DISABLE KEYS */;
 INSERT INTO `tb_user` (`id`, `password`, `name`, `register_date`, `isAccountNonExpired`, `isAccountNonLocked`, `isCredentialsNonExpired`, `isEnabled`) VALUES
-	('user', '$2a$10$f7uKmqvzVqFtTm4S5UnC6.vEzV9Z2b9EjkuHk3fLj4Aji/J1WUtge', '김건우', '2021-12-09', 1, 1, 1, 1);
+	('user', '$2a$10$f7uKmqvzVqFtTm4S5UnC6.vEzV9Z2b9EjkuHk3fLj4Aji/J1WUtge', '김건우', '2021-12-09', 1, 1, 1, 1),
+	('user2', '$2a$10$lUO6EeF0pesj6YNm8idjnuXdeFPz9QqfV7GkNUp5ou5.K4w3ZytDm', '이철수', '2021-12-20', 1, 1, 1, 1);
 /*!40000 ALTER TABLE `tb_user` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
