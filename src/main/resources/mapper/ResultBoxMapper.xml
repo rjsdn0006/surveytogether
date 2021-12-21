@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.surveytogether.mapper.ResultBoxMapper">
+	
+	<select id="selectResultBox" parameterType="long" resultType="ResultBoxDTO">
+		SELECT 		re_answer, COUNT(re_answer) as reCount
+		FROM 		tb_result
+		WHERE 		re_qu_idx = #{quIdx}
+		GROUP BY 	re_answer
+	</select>
+	
+</mapper>

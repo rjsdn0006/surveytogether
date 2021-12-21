@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.surveytogether.mapper.ResultMapper">
+
+	<sql id="resultCol">
+		re_su_idx,
+		re_qu_idx,
+		re_idx,
+		re_answer
+	</sql>
+	
+	<select id="findMaxReIdx" resultType="long">
+		SELECT 	IFNULL(MAX(re_idx),0)
+		FROM 	tb_result	
+	</select>
+	
+	<insert id="insertResult" parameterType="ResultDTO">
+		INSERT INTO 	tb_result(
+						<include refid="resultCol" />
+						)VALUES(
+						#{reSuIdx},
+						#{reQuIdx},
+						#{reIdx},
+						#{reAnswer}
+						)
+	</insert>
+	
+	<select id="selectResult" resultType="ResultDTO">
+		SELECT 	<include refid="resultCol" />
+		FROM 	tb_result
+	</select>
+
+</mapper>

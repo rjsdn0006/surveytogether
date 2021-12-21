@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.surveytogether.domain.AnswerDTO;
 import com.surveytogether.domain.QuestionDTO;
 import com.surveytogether.domain.QuestionOptionDTO;
+import com.surveytogether.domain.ResultBoxDTO;
+import com.surveytogether.domain.ResultDTO;
 import com.surveytogether.domain.SurveyDTO;
 import com.surveytogether.service.SurveyService;
 import com.surveytogether.util.UiUtils;
@@ -144,9 +146,25 @@ public class UserSurveyController extends UiUtils {
 	}
 	
 	@GetMapping("/statistics")
-	public String gotoStatistics() {
+	public String gotoStatistics(Long suIdx,Model model) {
+		
+		/*
+		 * 통계를 보여주기 위해서는 suIdx로 questionDTO를 가져온다.
+		 * 그중 format이 객관식,체크박스,드롭다운 인것의 질문제목과 quIdx(hidden input)을 뿌려준다.
+		 * 해당 quIdx를 전달하여 answer별 count를 가져온다. 
+		 */
+		
+		List<QuestionDTO> questionList = surveyService.getQuestionList(suIdx);
+		model.addAttribute("questionList",questionList);		
 		
 		return "/user/statistics";
+	}
+	
+	@GetMapping("/loadResultInfo")
+	@ResponseBody
+	public List<ResultBoxDTO> loadResultInfo(Long quIdx) {
+		List<ResultBoxDTO> resultList = surveyService.getResultBox(quIdx);
+		return resultList; 
 	}
 	
 	
@@ -192,6 +210,14 @@ public class UserSurveyController extends UiUtils {
 		}
 		
 		return result;
+	}
+	
+	@PostMapping("/insertResult")
+	public String insertResult(@RequestBody ResultDTO result) {
+		surveyService.insertResult(result);
+		
+		
+		return "/user/surveyboard";
 	}
 	
 }

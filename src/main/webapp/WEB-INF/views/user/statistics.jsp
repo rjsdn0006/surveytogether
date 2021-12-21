@@ -29,31 +29,82 @@
   
 <!-- 본문 -->
 <div class="wrapper">
+	
 	<div id="piechart" style="width: 900px; height: 500px;"></div>
+	
+	<c:forEach items="${questionList}" var="question" varStatus="status">
+		<c:if test="${question.quFormat != 'shortSentence'}">
+			<c:if test="${question.quFormat != 'longSentence'}">
+				<div class="statistics-box">
+					<input type="hidden" name="questionName" class="questionName" value="${question.quTitle}">
+					<input type="hidden" name="questionIdx" value="${question.quIdx}" />
+				</div>
+			</c:if>
+		</c:if>
+	</c:forEach>
+
+	
+	
 </div>
 
 <script>
 	google.charts.load('current', {'packages':['corechart']});
-	google.charts.setOnLoadCallback(drawChart);
+	let answerName = [];
+	let answerCount = [];
+	let questionName = $('.questionName');
+	let i = 0 ;
+	
+	$(function(){
+		loadChartInfo();
+	});
+	
+	function loadChartInfo(){
+		
+		let statisticsBox = $(".statistics-box");
+		
+		$.each(statisticsBox,function(index, statistics){
+			let quIdx = statistics.querySelector("input[name='questionIdx']").value;
+			$.ajax({
+				url:"/user/loadResultInfo",
+				method:"get",
+				data:{quIdx:quIdx}
+			}).done(function(result){
+				// result에는 resultList가 담겨있다. 
+				for(let i=0; i<result.length; i++){
+					answerName.push(result[i].reAnswer);
+					answerCount.push(result[i].reCount);
+				}
+				let chartBox = statistics.querySelector("div.chart-box"); // 차트넣을곳 선택 
+				google.charts.setOnLoadCallback(drawChart);
+		           
+			});
+		});
+		
+	};
 	
 	function drawChart() {
-	
-	  var data = google.visualization.arrayToDataTable([
-	    ['Task', 'Hours per Day'], // [분류, 비중]
-	    ['Work',     11],
-	    ['Eat',      2],
-	    ['Commute',  2],
-	    ['Watch TV', 2],
-	    ['Sleep',    7]
-	  ]);
+		
+	  let array = [];
+	  let defaultOption = ['Option','Percentage'];
+	  array.push(defaultOption);
+	  for(let i=0; i<answerName.length; i++){
+		  let box = [];
+		  box.push(answerName[i]);
+		  box.push(answerCount[i]);
+		  array.push(box);
+	  }
+	  var data = google.visualization.arrayToDataTable(array);
 	
 	  var options = {
-	    title: 'My Daily Activities'
+	    title: questionName[i].value
 	  };
 	
 	  var chart = new google.visualization.PieChart(document.getElementById('piechart'));
 	
 	  chart.draw(data, options);
+	  answerName = []; // 전역변수 이므로 초기화시켜줌
+	  answerCount = []; // 위와같음
+	  i += 1;
 	}
 </script>
 </body>

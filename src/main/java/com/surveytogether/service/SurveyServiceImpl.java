@@ -13,9 +13,13 @@ import org.springframework.util.CollectionUtils;
 import com.surveytogether.domain.AnswerDTO;
 import com.surveytogether.domain.QuestionDTO;
 import com.surveytogether.domain.QuestionOptionDTO;
+import com.surveytogether.domain.ResultBoxDTO;
+import com.surveytogether.domain.ResultDTO;
 import com.surveytogether.domain.SurveyDTO;
 import com.surveytogether.mapper.QuestionMapper;
 import com.surveytogether.mapper.QuestionOptionMapper;
+import com.surveytogether.mapper.ResultBoxMapper;
+import com.surveytogether.mapper.ResultMapper;
 import com.surveytogether.mapper.SelectAnswerMapper;
 import com.surveytogether.mapper.StringAnswerMapper;
 import com.surveytogether.mapper.SurveyMapper;
@@ -34,6 +38,10 @@ public class SurveyServiceImpl implements SurveyService {
 	StringAnswerMapper stringAnswerMapper;
 	@Autowired
 	SelectAnswerMapper selectAnswerMapper;
+	@Autowired
+	ResultMapper resultMapper;
+	@Autowired
+	ResultBoxMapper resultBoxMapper;
 	
 	@Override
 	public boolean registerSurvey(SurveyDTO survey) {
@@ -196,6 +204,18 @@ public class SurveyServiceImpl implements SurveyService {
 		list.addAll(listB);
 		
 		return list;
+	}
+
+	@Override
+	public void insertResult(ResultDTO result) {
+		long idx = resultMapper.findMaxReIdx();
+		result.setReIdx(idx+1);
+		resultMapper.insertResult(result);
+	}
+
+	@Override
+	public List<ResultBoxDTO> getResultBox(Long quIdx) {
+		return resultBoxMapper.selectResultBox(quIdx);
 	}
 
 

@@ -21,7 +21,7 @@
 			<span class="header-title">Answers</span>
 		</div>
 		<div class="right-box">
-			<a href="/user/statistics"><span class="menu1">통계보기</span></a>
+			<a href="/user/statistics?suIdx=${suIdx}"><span class="menu1">통계보기</span></a>
 			<a href="#" onclick="history.back()"><span class="menu2">뒤로가기</span></a>
 		</div>
 	</div>

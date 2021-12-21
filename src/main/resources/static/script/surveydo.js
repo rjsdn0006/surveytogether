@@ -12,6 +12,10 @@ function doneSurvey(){
 		let stringAnswer = new Object();
 		let selectAnswer = new Object();
 		
+		let result = new Object();
+		result.reSuIdx = $("#surveyIdx").val();
+		result.reQuIdx = questionIdx;
+
 		// format에 따라서 답변을 가져오는 방식이 달라진다. 
 		if(format == 'shortSentence' || format == 'longSentence'){
 			answer = fieldset.querySelector(".answer").value;
@@ -19,11 +23,17 @@ function doneSurvey(){
 			stringAnswer.straWriter = answerUser;
 			stringAnswer.straAnswer = answer;
 			
+			result.reAnswer = answer;
+			insertResult(result);
+	
 		}else if(format == 'multipleChoice' || format == 'checkBox'){
 			let checkedList = fieldset.querySelectorAll("input[class='option']:checked");
 			answer = [];
 			checkedList.forEach(function(checked){
 				answer.push(checked.value);
+				
+				result.reAnswer = checked.value;
+				insertResult(result);
 			}); 
 			selectAnswer.selaQuestionIdx = questionIdx;
 			selectAnswer.selaWriter = answerUser;
@@ -36,6 +46,9 @@ function doneSurvey(){
 			selectAnswer.selaQuestionIdx = questionIdx;
 			selectAnswer.selaWriter = answerUser;
 			selectAnswer.selaAnswer = answer;
+			
+			result.reAnswer = selectBox.options[selectBox.selectedIndex].value;
+			insertResult(result);
 		}
 		
 		let answerDTO = {
@@ -59,6 +72,18 @@ function doneSurvey(){
 
 }
 
+function insertResult(result){
+	// 파라미터인 result에는 result의 요소들이 담겨있다.
+	// 다만, reIdx는 들어있지 않으므로 서비스단에서 설정해준다.
+	$.ajax({
+		url: "/user/insertResult",
+		method: "post",
+		data: JSON.stringify(result),
+		contentType: "application/json"
+	}).done(function(result){
+		
+	});
+}
  /* ------------------------ question 불러오기 ------------------------ */
 $(function(){
 	let suIdx = $("#surveyIdx").val();
